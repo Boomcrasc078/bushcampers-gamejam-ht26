@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 8528481878204748169}
   - component: {fileID: 7046508057768344770}
   - component: {fileID: 9218142906754983035}
+  - component: {fileID: 7273882334596091131}
   m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -161,7 +162,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.05
 --- !u!50 &9218142906754983035
 Rigidbody2D:
   serializedVersion: 5
@@ -189,3 +190,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7273882334596091131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701484596721332199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82c09c6573e54ec5b813af5c1b314f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBullet

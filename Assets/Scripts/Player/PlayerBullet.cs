@@ -21,6 +21,6 @@ public class PlayerBullet : MonoBehaviour
 
     void DestroyGameobject()
     {
-
+        Destroy(gameObject);
     }
 }
