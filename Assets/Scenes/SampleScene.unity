@@ -400,6 +400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902105742}
   - component: {fileID: 1902105743}
+  - component: {fileID: 1902105744}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -417,7 +418,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 959388952}
@@ -482,6 +483,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1902105744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902105741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c4247cee4664a9c9bb0e691e32f54c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointTowardsVelocity
+  rigidbody2D: {fileID: 959388950}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
