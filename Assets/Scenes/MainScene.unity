@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 890518254}
   - component: {fileID: 890518253}
   - component: {fileID: 890518252}
+  - component: {fileID: 890518256}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -287,6 +288,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &890518256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890518251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4764d72f12c9416a8c2ff24a0b6e122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
+  speed: 1000
+  ticksPerSecond: 1
 --- !u!1 &959388947
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +316,7 @@ GameObject:
   - component: {fileID: 959388949}
   - component: {fileID: 959388948}
   - component: {fileID: 959388953}
+  - component: {fileID: 959388954}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -438,6 +454,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6701484596721332199, guid: 30d2de2b251044ebf9957ecc3aaed800, type: 3}
   playerRotationTransform: {fileID: 1225077399}
   fireTransform: {fileID: 499048650}
+--- !u!114 &959388954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959388947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5decc166dfad40869a01e257bddb43a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraTarget
 --- !u!1 &1225077398
 GameObject:
   m_ObjectHideFlags: 0
