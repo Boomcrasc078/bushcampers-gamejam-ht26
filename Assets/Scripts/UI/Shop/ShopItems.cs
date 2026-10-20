@@ -12,7 +12,7 @@ public class ShopItems : MonoBehaviour
         {
             var currentItemGameobject = Instantiate(shopItemPrefab, transform);
             var shopItemUI = currentItemGameobject.GetComponent<ShopItemUI>();
-            shopItemUI.SetItem(item.itemName, item.itemDescription, item.upgradeIndex, item.purchaseText, item.upgradeText);
+            shopItemUI.SetItem(item);
         }
     }
 

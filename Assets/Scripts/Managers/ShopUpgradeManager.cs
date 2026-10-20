@@ -39,6 +39,7 @@ public class ShopUpgradeManager : MonoBehaviour
         }
 
         activatedUpgrades.Add(upgrade);
+        upgrade.Levelup();
     }
 
 }

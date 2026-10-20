@@ -6,8 +6,9 @@ public class ShopItemUI : MonoBehaviour
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text itemDescriptionText;
     [SerializeField] private TMP_Text itemButtonText;
-    private string purchaseText;
-    private string upgradeText;
+    [SerializeField] private TMP_Text itemCostText;
+    private ShopItem shopItem;
+
     private Upgrade upgrade;
     private ShopUpgradeManager upgradeManager;
 
@@ -18,27 +19,34 @@ public class ShopItemUI : MonoBehaviour
 
     public void OnButtonPress()
     {
+        //Fixa kostnad
         upgradeManager.Upgrade(upgrade);
     }
 
-    public void SetItem(string name, string description, int upgradeIndex, string purchaseText, string upgradeText)
+    public void SetItem(ShopItem shopItem)
     {
-        itemNameText.text = name;
-        itemDescriptionText.text = description;
-        upgrade = upgradeManager.Upgrades[upgradeIndex];
-        this.purchaseText = purchaseText;
-        this.upgradeText = upgradeText;
+        this.shopItem = shopItem;
+        itemNameText.text = shopItem.name;
+        itemDescriptionText.text = shopItem.itemDescription;
+        upgrade = upgradeManager.Upgrades[shopItem.upgradeIndex];
+    }
+
+    private float GetCost()
+    {
+        return Mathf.Round(shopItem.itemBaseCost * Mathf.Pow(shopItem.itemCostMultiplier, upgrade.Level));
     }
 
     void Update()
     {
         if (upgradeManager.ActivatedUpgrades.Contains(upgrade))
         {
-            itemButtonText.text = upgradeText;
+            itemButtonText.text = shopItem.upgradeText;
         }
         else
         {
-            itemButtonText.text = purchaseText;
+            itemButtonText.text = shopItem.purchaseText;
         }
+
+        itemCostText.text = $"{TrainingDataDisplay.FormatTrainingData(GetCost())} REQUIRED";
     }
 }

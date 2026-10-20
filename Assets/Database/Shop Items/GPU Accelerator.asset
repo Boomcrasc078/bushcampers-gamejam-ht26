@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: TestItem
+  m_Name: GPU Accelerator
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemName: ITEM
-  itemDescription: TEST DESCRIPTION
+  itemDescription: Accelerates the GPU to be able to train more.
   itemBaseCost: 30
   itemCostMultiplier: 1.2
   upgradeIndex: 0
-  purchaseText: Learn
-  upgradeText: Train
+  purchaseText: Install
+  upgradeText: Improve

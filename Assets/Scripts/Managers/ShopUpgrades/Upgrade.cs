@@ -3,7 +3,7 @@ using UnityEngine;
 public class Upgrade
 {
     public int Level => level;
-    private int level = 1;
+    private int level = 0;
 
     public void Levelup()
     {
