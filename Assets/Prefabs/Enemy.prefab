@@ -1,5 +1,82 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1473120178108769728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5601101712990778187}
+  - component: {fileID: 230723559494389025}
+  m_Layer: 0
+  m_Name: RotationTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5601101712990778187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473120178108769728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2561810416744576933}
+  m_Father: {fileID: 6893577622490525758}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &230723559494389025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473120178108769728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb432039347144a6b39b293af50c34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointTowardsEnemyTarget
+  ticksPerSecond: 1
+--- !u!1 &4072122537998091783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2561810416744576933}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2561810416744576933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072122537998091783}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5601101712990778187}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4297882259665328150
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +180,8 @@ GameObject:
   - component: {fileID: 6893577622490525758}
   - component: {fileID: 5197025735852166352}
   - component: {fileID: 2479400624499584264}
+  - component: {fileID: 3695624102931312124}
+  - component: {fileID: 4703576278613363917}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -125,6 +204,7 @@ Transform:
   m_Children:
   - {fileID: 9159151932818206561}
   - {fileID: 1639524389899839362}
+  - {fileID: 5601101712990778187}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &5197025735852166352
@@ -161,6 +241,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768a4dd9542034c3887e9f5b9cf4b1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+--- !u!114 &3695624102931312124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473851510182007783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e601bdf02ece43f2a0738785780b1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyInput
+  rateOfFire: 1
+  shootTickerEnabled: 1
+--- !u!114 &4703576278613363917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473851510182007783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d6b19a2185f4e47bed5e5c2d499797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shooting
+  bulletPrefab: {fileID: 6701484596721332199, guid: 30d2de2b251044ebf9957ecc3aaed800, type: 3}
+  rotationTransform: {fileID: 5601101712990778187}
+  firePositionTransform: {fileID: 2561810416744576933}
 --- !u!1 &8312751838526455798
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -7,8 +8,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float lookAheadDistance = 1.5f;
     [SerializeField] private float ticksPerSecond = 1f;
     private Transform target;
-    private Vector3 previousTargetPosition;
-    private bool hasPreviousTargetPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,15 +35,23 @@ public class CameraMovement : MonoBehaviour
             return;
         }
 
-        var movement = hasPreviousTargetPosition
-            ? (Vector2)(target.position - previousTargetPosition)
-            : Vector2.zero;
-        previousTargetPosition = target.position;
-        hasPreviousTargetPosition = true;
+        var lookAhead = Vector2.zero;
+        if (Mouse.current != null && Camera.main != null)
+        {
+            var camera = Camera.main;
+            var mousePosition = Mouse.current.position.ReadValue();
+            var cameraDistance = Vector3.Dot(
+                target.position - camera.transform.position,
+                camera.transform.forward);
+            var mouseWorldPosition = camera.ScreenToWorldPoint(
+                new Vector3(mousePosition.x, mousePosition.y, cameraDistance));
+            var directionToMouse = (Vector2)(mouseWorldPosition - target.position);
+            if (directionToMouse.sqrMagnitude > 0f)
+            {
+                lookAhead = directionToMouse.normalized * lookAheadDistance;
+            }
+        }
 
-        var lookAhead = movement.sqrMagnitude > 0f
-            ? movement.normalized * lookAheadDistance
-            : Vector2.zero;
         var targetPosition = new Vector3(
             target.position.x + lookAhead.x,
             target.position.y + lookAhead.y,
