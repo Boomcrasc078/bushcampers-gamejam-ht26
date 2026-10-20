@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.Video;
 
-public class Health : MonoBehaviour {
-    [SerializeField]private GameObject mainGameObject;
+public class Health : MonoBehaviour
+{
+    [SerializeField] private GameObject mainGameObject;
     private float healthAmount = 10f;
     public void TakeDamage(float damage)
     {
@@ -12,9 +13,11 @@ public class Health : MonoBehaviour {
             Die();
         }
     }
-    
+
     void Die()
     {
+        var onDeath = GetComponent<IOnDeath>();
+        onDeath.OnDeath();
         Destroy(mainGameObject);
     }
 }

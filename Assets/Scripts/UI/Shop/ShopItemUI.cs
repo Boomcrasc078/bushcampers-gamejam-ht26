@@ -19,8 +19,12 @@ public class ShopItemUI : MonoBehaviour
 
     public void OnButtonPress()
     {
-        //Fixa kostnad
-        upgradeManager.Upgrade(upgrade);
+        var trainingDataManager = TrainingDataManager.instance;
+        if (trainingDataManager.HasEnoughTrainingData(GetCost()))
+        {
+            trainingDataManager.DecreaseTrainingData(GetCost());
+            upgradeManager.Upgrade(upgrade);
+        }
     }
 
     public void SetItem(ShopItem shopItem)

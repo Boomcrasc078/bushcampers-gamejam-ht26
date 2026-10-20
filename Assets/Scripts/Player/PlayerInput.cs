@@ -9,8 +9,6 @@ public class PlayerInput : MonoBehaviour, IShooting
 
     public Action Shoot { get; set; }
 
-    public event Action<InputAction.CallbackContext> Attack;
-
     void OnEnable() => attackInput.action.started += OnAttackStarted;
     void OnDisable() => attackInput.action.started -= OnAttackStarted;
 
