@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
   m_Name: Processing Speed Acceleration Unit
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: 
+  itemDescription: 'An extra processor for the graphical processing unit programmed to accelerate the speed to access new training sources. '
   itemBaseCost: 30
   itemCostMultiplier: 1.2
   upgradeIndex: 0

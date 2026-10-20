@@ -1,0 +1,86 @@
+---------------UPGRADES---------------
+
+
+----------------INDEX 0---------------
+Processing Speed Acceleration Unit
+
+Description: 
+An extra processor for the graphical processing unit programmed to accelerate the speed to access new training sources.
+
+Vad den faktiskt gör: Gör spelaren snabbare
+
+Base cost: 32 Bytes
+Item Cost Multiplier: 1.2
+Purchase Text: Install
+Upgrade Text: Upgrade
+--------------------------------------
+
+----------------INDEX 1---------------
+Random Access Memory Installation
+
+Description: 
+A new installation of Random Access Memory which enables the processor to handle more at once.
+
+Vad den faktiskt gör: Gör kartan större.
+
+Base cost: 87 Bytes
+Item Cost Multiplier: 2.3
+Purchase Text: Install
+Upgrade Text: Install
+--------------------------------------
+
+----------------INDEX 2---------------
+Ultra Performance Graphical Processing Unit
+
+Description: 
+Enables the Graphical Processing Unit to use it's maximum capacity during the learning process.
+
+Vad den faktiskt gör: Gör så att spelaren skjuter snabbare.
+
+Base cost: 122 Bytes
+Item Cost Multiplier: 1.7
+Purchase Text: Install
+Upgrade Text: Upgrade
+--------------------------------------
+
+----------------INDEX 3---------------
+Central Processing Unit Core Increase
+
+Description: 
+Increase the Central Processing Unit Core count to handle multiple learning processes at once.
+
+Vad den faktiskt gör: Gör så att kartan får fler rum
+
+Base cost: 146 Bytes
+Item Cost Multiplier: 1.4
+Purchase Text: Increase
+Upgrade Text: Increase
+--------------------------------------
+
+----------------INDEX 4---------------
+Top Tier Durability Titanium Case
+
+Description: 
+Purchase of top tier titanium cases for the safety of computers processing sources used for training data.
+
+Vad den faktiskt gör: Ger spelaren mer liv
+
+Base cost: 48 Bytes
+Item Cost Multiplier: 1.8
+Purchase Text: Purchase
+Upgrade Text: Purchase
+--------------------------------------
+
+----------------INDEX 5---------------
+
+
+Description: 
+
+Vad den faktiskt gör: Större chans för powerups att spawna
+
+Base cost: 0 Bytes
+Item Cost Multiplier: 1
+Purchase Text: Install
+Upgrade Text: Upgrade
+--------------------------------------
+
