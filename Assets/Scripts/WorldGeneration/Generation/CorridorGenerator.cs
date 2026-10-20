@@ -4,13 +4,16 @@ using UnityEngine;
 public class CorridorGenerator
 {
 
+    public int[] ConnectionCounts { get; private set; }
+
     // Connects rooms in the world grid by carving corridors between them.
     public void ConnectRooms(WorldGrid world, List<RectInt> rooms, int corridorWidth, int seed, float extraConnectionChance)
     {
+        ConnectionCounts = new int[rooms.Count];
         // Validate inputs
-        if(corridorWidth < 1)
+        if (corridorWidth < 1)
         {
-            Debug.LogWarning("Corridor width must be at least 1.");
+            Debug.LogError("Corridor width must be at least 1.");
             return;
         }
         if (rooms.Count < 2)
@@ -24,7 +27,6 @@ public class CorridorGenerator
         HashSet<int> connected = new HashSet<int> { 0 };
 
         bool[,] directConnections = new bool[rooms.Count, rooms.Count];
-        int connectionCount = 0;
 
         System.Random shapeRandom = new System.Random(seed);
 
@@ -75,10 +77,9 @@ public class CorridorGenerator
             }
             else
             {
-                CarveCorridor(world, GetRoomCenter(rooms[fromIndex]), GetRoomCenter(rooms[toIndex]), corridorWidth, shapeRandom.Next(2) == 0); // Carve the corridor between the two rooms
+                CarveCorridor(world, start,end, corridorWidth, shapeRandom.Next(2) == 0); // Carve the corridor between the two rooms
             }
 
-            connectionCount++;
             directConnections[fromIndex, toIndex] = true;
             directConnections[toIndex, fromIndex] = true;
 
@@ -106,7 +107,7 @@ public class CorridorGenerator
 
                 if (useDiagonal)
                 {
-                    CarveDiagonalCorridor(world, GetRoomCenter(rooms[i]), GetRoomCenter(rooms[candidateRoom]), corridorWidth);
+                    CarveDiagonalCorridor(world, start, end, corridorWidth);
                 }
                 else
                 {
@@ -118,9 +119,28 @@ public class CorridorGenerator
                 directConnections[i, candidateRoom] = true;
                 directConnections[candidateRoom, i] = true;
 
-                Debug.Log($"Extra connections candidate {i} -> {candidateRoom}");
+                //Debug.Log($"Extra connections candidate {i} -> {candidateRoom}");
             }
         }
+
+        for(int i = 0; i < rooms.Count; i++)
+        {
+            int connections = 0;
+
+            for (int j = 0; j < rooms.Count; j++)
+            {
+                if (directConnections[i, j])
+                {
+                    connections++;
+                }
+            }
+            ConnectionCounts[i] = connections;
+            if(connections == 1)
+            {
+                Debug.Log($"Dead-end-candidate: Room {i}");
+            }
+        }
+       
 
     }
 

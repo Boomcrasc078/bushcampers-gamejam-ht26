@@ -5,7 +5,7 @@ public class RoomGenerator
 {
     public List<RectInt> GenerateRooms(int mapWidth, int mapHeight, int roomCount, int minRoomSize, int maxRoomSize, int seed)
     {
-        Random.InitState(seed);
+        System.Random random = new System.Random(seed);
 
         List<RectInt> rooms = new List<RectInt>();
 
@@ -15,14 +15,14 @@ public class RoomGenerator
         {
             if (rooms.Count >= roomCount)
                 break;
-            int roomWidth = Random.Range(minRoomSize, maxRoomSize + 1);
-            int roomHeight = Random.Range(minRoomSize, maxRoomSize + 1);
+            int roomWidth = random.Next(minRoomSize, maxRoomSize + 1);
+            int roomHeight = random.Next(minRoomSize, maxRoomSize + 1);
 
             if(roomWidth >= mapWidth -2 || roomHeight >= mapHeight - 2)
                 continue;   
 
-            int x = Random.Range(1, mapWidth - roomWidth);
-            int y = Random.Range(1, mapHeight - roomHeight);
+            int x = random.Next(1, mapWidth - roomWidth);
+            int y = random.Next(1, mapHeight - roomHeight);
 
             RectInt newRoom = new RectInt(x, y, roomWidth, roomHeight);
 

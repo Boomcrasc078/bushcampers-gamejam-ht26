@@ -39,4 +39,9 @@ public class WorldRenderer : MonoBehaviour
             }
         }
     }
+    public Vector3 GetCellCenterWorld(Vector2Int cell)
+    {
+        Vector3Int cellPosition = new Vector3Int(cell.x, cell.y, 0);
+        return floorTilemap.GetCellCenterWorld(cellPosition);
+    }
 }
