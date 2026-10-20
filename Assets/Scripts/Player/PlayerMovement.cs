@@ -3,6 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed = 5f;
+     
+
     private PlayerInput playerInput;
     private Rigidbody2D rigidbody2D;
 
@@ -12,20 +15,15 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
     
     void Move()
     {
-        rigidbody2D.AddForce(playerInput.GetMoveInput());
+        Vector2 direction = Vector2.ClampMagnitude(playerInput.GetMoveInput(), 1f);
+
+        rigidbody2D.linearVelocity = direction * moveSpeed;
     }
 }

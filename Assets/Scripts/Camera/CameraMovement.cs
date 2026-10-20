@@ -1,61 +1,43 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 100f;
+    [SerializeField] private float speed = 8f;
     [SerializeField] private float lookAheadDistance = 1.5f;
-    [SerializeField] private float ticksPerSecond = 1f;
     private Transform target;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void SetTarget(Transform newTarget)
     {
-        StartCoroutine(CameraTicker());
+        target = newTarget;
+
+        if (target == null)
+            return;
+
+        transform.position = new Vector3(target.position.x, target.position.y, -10f);
     }
 
-    IEnumerator CameraTicker()
-    {
-        while (true)
-        {
-            var getTarget = FindAnyObjectByType<CameraTarget>();
-            if (getTarget != null)
-            {
-                target = getTarget.transform;
-            }
-            yield return new WaitForSeconds(1 / ticksPerSecond);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (target == null)
-        {
             return;
-        }
 
-        var lookAhead = Vector2.zero;
-        if (Mouse.current != null && Camera.main != null)
+        Vector2 lookAhead = Vector2.zero;
+
+        if(Mouse.current != null && Camera.main != null)
         {
-            var camera = Camera.main;
-            var mousePosition = Mouse.current.position.ReadValue();
-            var cameraDistance = Vector3.Dot(
-                target.position - camera.transform.position,
-                camera.transform.forward);
-            var mouseWorldPosition = camera.ScreenToWorldPoint(
-                new Vector3(mousePosition.x, mousePosition.y, cameraDistance));
-            var directionToMouse = (Vector2)(mouseWorldPosition - target.position);
-            if (directionToMouse.sqrMagnitude > 0f)
-            {
-                lookAhead = directionToMouse.normalized * lookAheadDistance;
-            }
-        }
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
 
-        var targetPosition = new Vector3(
-            target.position.x + lookAhead.x,
-            target.position.y + lookAhead.y,
-            -10f);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
+            Vector3 viewport = Camera.main.ScreenToViewportPoint(new Vector3(mousePosition.x, mousePosition.y, 0f));
+
+            Vector2 offsetFromCenter = new Vector2((viewport.x - 0.5f) * 2f, (viewport.y - 0.5f) * 2f);
+
+            lookAhead = Vector2.ClampMagnitude(offsetFromCenter, 1f) * lookAheadDistance;
+
+            Vector3 targetPosition = new Vector3(target.position.x +lookAhead.x, target.position.y+lookAhead.y,-10f);
+
+
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
+        }
     }
 }

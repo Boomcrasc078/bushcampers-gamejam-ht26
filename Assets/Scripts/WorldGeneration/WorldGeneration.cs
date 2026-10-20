@@ -33,10 +33,6 @@ public class WorldGeneration : MonoBehaviour
 
     private List<RectInt> rooms;
 
-    private void Start()
-    {
-        GenerateWorld();
-    }
 
     public void GenerateWorld()
     {
