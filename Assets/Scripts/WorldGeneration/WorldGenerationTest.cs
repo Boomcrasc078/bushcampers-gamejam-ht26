@@ -19,6 +19,11 @@ public class WorldGenerationTest : MonoBehaviour
 
     [Header("Corridor Settings")]
     [SerializeField] private int corridorWidth = 5;
+    [Range(0, 1f)]
+    [SerializeField] private float extraConnectionChance = 0.35f;
+
+
+    private List<RectInt> rooms;
 
     private void Start()
     {
@@ -28,7 +33,7 @@ public class WorldGenerationTest : MonoBehaviour
         // 2. Generate rooms
         RoomGenerator roomGenerator = new RoomGenerator();
 
-        List<RectInt> rooms = roomGenerator.GenerateRooms(
+        rooms = roomGenerator.GenerateRooms(
             width,
             height,
             roomCount,
@@ -55,7 +60,9 @@ public class WorldGenerationTest : MonoBehaviour
         corridorGenerator.ConnectRooms(
             world,
             rooms,
-            corridorWidth
+            corridorWidth,
+            seed,
+            extraConnectionChance
         );
 
         // 5. Render the finished world
@@ -63,4 +70,25 @@ public class WorldGenerationTest : MonoBehaviour
 
         Debug.Log($"Generated {rooms.Count} rooms with seed {seed}.");
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (rooms == null)
+            return;
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            RectInt room = rooms[i];
+
+            Vector3 center = new Vector3(
+                room.center.x,
+                room.center.y,
+                0
+            );
+
+            UnityEditor.Handles.Label(center, $"Room {i}");
+        }
+    }
+#endif
 }

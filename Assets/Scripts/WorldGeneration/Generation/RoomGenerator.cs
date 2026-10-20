@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class RoomGenerator
@@ -20,7 +19,7 @@ public class RoomGenerator
             int roomHeight = Random.Range(minRoomSize, maxRoomSize + 1);
 
             if(roomWidth >= mapWidth -2 || roomHeight >= mapHeight - 2)
-                continue;
+                continue;   
 
             int x = Random.Range(1, mapWidth - roomWidth);
             int y = Random.Range(1, mapHeight - roomHeight);
