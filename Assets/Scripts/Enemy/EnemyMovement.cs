@@ -12,6 +12,10 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        agent.SetDestination(FindAnyObjectByType<PlayerMovement>().transform.position);
+        var target = FindAnyObjectByType<EnemyTarget>();
+        if (target != null)
+        {
+            agent.SetDestination(target.transform.position);
+        }
     }
 }
