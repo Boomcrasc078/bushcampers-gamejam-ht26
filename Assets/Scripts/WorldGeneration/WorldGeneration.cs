@@ -187,6 +187,16 @@ public class WorldGeneration : MonoBehaviour
         return rewardLocations;
     }
 
+    public Vector2Int WorldToCell(Vector3 worldPosition)
+    {
+        return worldRenderer.WorldToCell(worldPosition);
+    }
+
+    public Vector3 CellToWorld(Vector2Int cell)
+    {
+        return worldRenderer.GetCellCenterWorld(cell);
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

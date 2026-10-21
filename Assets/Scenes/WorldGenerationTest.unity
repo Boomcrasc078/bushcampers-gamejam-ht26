@@ -338,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   worldGeneration: {fileID: 624846346}
   playerPrefab: {fileID: 8054339920877794812, guid: 7ab786aed24dd0f4dbdffb4f54aa3bcf, type: 3}
+  enemyPrefab: {fileID: 7473851510182007783, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
   cameraMovement: {fileID: 2132013785}
 --- !u!1 &624846343
 GameObject:
@@ -577,6 +578,71 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1001 &1391738859
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 46.3896
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 34.47614
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893577622490525758, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473851510182007783, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966640355639335518, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966640355639335518, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
 --- !u!1 &2132013780
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +656,7 @@ GameObject:
   - component: {fileID: 2132013781}
   - component: {fileID: 2132013784}
   - component: {fileID: 2132013785}
+  - component: {fileID: 2132013786}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -640,7 +707,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8.208333
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -729,6 +796,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   speed: 2
   lookAheadDistance: 3
+--- !u!114 &2132013786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132013780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.PixelPerfectCamera
+  m_ComponentVersion: 1
+  m_AssetsPPU: 24
+  m_RefResolutionX: 400
+  m_RefResolutionY: 270
+  m_CropFrame: 0
+  m_GridSnapping: 2
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -736,3 +827,4 @@ SceneRoots:
   - {fileID: 2132013783}
   - {fileID: 486023433}
   - {fileID: 624846344}
+  - {fileID: 1391738859}
