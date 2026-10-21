@@ -51,6 +51,7 @@ public class Health : MonoBehaviour
 
     public void Initialize(float maxHealth)
     {
-        healthAmount = maxHealth;
+        startingHealth = maxHealth;
+        healthAmount = startingHealth + GetHealthUpgrade();
     }
 }

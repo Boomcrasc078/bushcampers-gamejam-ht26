@@ -132,6 +132,14 @@ public class EnemySpawner : MonoBehaviour
                 Debug.LogWarning($"Enemy {enemyType.enemyName} has no health component");
             }
 
+            EnemyMeleeAttack meleeattack = enemy.GetComponent<EnemyMeleeAttack>();
+
+            if(meleeattack != null)
+            {
+                meleeattack.Initialize(player, enemyType.damage);
+            }
+
+
             spawnedPositions.Add(spawnPosition2D);
             spawned++;
         }
