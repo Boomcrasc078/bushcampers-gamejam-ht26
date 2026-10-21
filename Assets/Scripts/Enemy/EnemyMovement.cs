@@ -7,6 +7,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float stoppingDistance = 0.7f;
     [SerializeField] private LayerMask wallLayer;
 
+    [Header("Swarm movement")]
+    [SerializeField] private LayerMask enemylayer;
+    [SerializeField] private float seperationStrength = 0.8f;
+    [SerializeField] private float seperationPadding = 0.4f;
+
+    
+
     private Rigidbody2D rb;
     private Transform target;
     private WorldGeneration world;
@@ -16,7 +23,13 @@ public class EnemyMovement : MonoBehaviour
     private readonly RaycastHit2D[] wallHits = new RaycastHit2D[8];
     private ContactFilter2D wallFilter;
 
+    private readonly Collider2D[] nearbyEnemies = new Collider2D[32];
+    private ContactFilter2D enemyFilter;
+    private float seperationSide;
+
     private CircleCollider2D bodyCollider;
+
+
 
 
     private void Awake()
@@ -27,6 +40,12 @@ public class EnemyMovement : MonoBehaviour
         wallFilter = new ContactFilter2D();
         wallFilter.SetLayerMask(wallLayer);
         wallFilter.useTriggers = false;
+
+        enemyFilter = new ContactFilter2D();
+        enemyFilter.SetLayerMask(enemylayer);
+        enemyFilter.useTriggers = false;
+
+        seperationSide = Random.value < 0.5f ? 1f : -1f;
     }
 
     public void Initialize(Transform target,WorldGeneration world,GridNavigation navigation)
@@ -48,100 +67,182 @@ public class EnemyMovement : MonoBehaviour
     
 
 
-private void FixedUpdate()
-{
-    if (target == null || world == null || navigation == null)
+    private void FixedUpdate()
     {
-        rb.linearVelocity = Vector2.zero;
-        return;
-    }
-
-    Vector2 currentPosition = rb.position;
-    Vector2 targetPosition = target.position;
-
-    //1 check if enemy can reach player without pathing
-    Vector2 toPlayer = targetPosition - currentPosition;
-
-    bool wallBetween =
-        toPlayer.sqrMagnitude > 0.0001f &&
-        rb.Cast(
-            toPlayer.normalized,
-            wallFilter,
-            wallHits,
-            toPlayer.magnitude
-        ) > 0;
-
-    Debug.DrawLine(
-        currentPosition,
-        targetPosition,
-        wallBetween ? Color.red : Color.green
-    );
-
-
-    //2 check if current waypoint is finished
-    if (currentWaypoint != null &&
-        Vector2.Distance(
-            currentPosition,
-            world.CellToWorld(currentWaypoint.Value)
-        ) < 0.1f)
-    {
-        currentWaypoint = null;
-    }
-
-    Vector2 destination = targetPosition;
-
-
-    //3 chase only when no wall or waypoint is in the way!
-    if (!wallBetween && currentWaypoint == null)
-    {
-        if (Vector2.Distance(currentPosition, targetPosition) <= stoppingDistance)
+        if (target == null || world == null || navigation == null)
         {
             rb.linearVelocity = Vector2.zero;
             return;
         }
-    }
-    else
-    {
-        //4 follow current or select new
-        if (currentWaypoint == null)
-        {
-            Vector2Int currentCell = world.WorldToCell(transform.position);
-            Vector2Int nextCell = navigation.GetNextCell(currentCell);
 
-            if (nextCell == currentCell)
+        Vector2 currentPosition = rb.position;
+        Vector2 targetPosition = target.position;
+
+        //1 check if enemy can reach player without pathing
+        Vector2 toPlayer = targetPosition - currentPosition;
+
+        bool wallBetween =
+            toPlayer.sqrMagnitude > 0.0001f &&
+            rb.Cast(
+                toPlayer.normalized,
+                wallFilter,
+                wallHits,
+                toPlayer.magnitude
+            ) > 0;
+
+        Debug.DrawLine(
+            currentPosition,
+            targetPosition,
+            wallBetween ? Color.red : Color.green
+        );
+
+
+        //2 check if current waypoint is finished
+        if (currentWaypoint != null &&
+            Vector2.Distance(
+                currentPosition,
+                world.CellToWorld(currentWaypoint.Value)
+            ) < 0.1f)
+        {
+            currentWaypoint = null;
+        }
+
+        Vector2 destination = targetPosition;
+
+
+        //3 chase only when no wall or waypoint is in the way!
+        if (!wallBetween && currentWaypoint == null)
+        {
+            if (Vector2.Distance(currentPosition, targetPosition) <= stoppingDistance)
             {
                 rb.linearVelocity = Vector2.zero;
                 return;
             }
+        }
+        else
+        {
+            //4 follow current or select new
+            if (currentWaypoint == null)
+            {
+                Vector2Int currentCell = world.WorldToCell(transform.position);
+                Vector2Int nextCell = navigation.GetNextCell(currentCell);
 
-            currentWaypoint = nextCell;
+                if (nextCell == currentCell)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                    return;
+                }
+
+                currentWaypoint = nextCell;
+            }
+
+            destination = world.CellToWorld(currentWaypoint.Value);
         }
 
-        destination = world.CellToWorld(currentWaypoint.Value);
+        //5 check if the destination is blocked - >> Debugging 
+        Vector2 toWaypoint = destination - currentPosition;
+
+        bool waypointBlocked =
+            toWaypoint.sqrMagnitude > 0.0001f &&
+            rb.Cast(
+                toWaypoint.normalized,
+                wallFilter,
+                wallHits,
+                toWaypoint.magnitude
+            ) > 0;
+
+        Debug.DrawLine(
+            currentPosition,
+            destination,
+            waypointBlocked ? Color.magenta : Color.cyan
+        );
+
+
+        // 6 calc direction to destination
+        Vector2 desiredDirection =
+            (destination - currentPosition).normalized;
+
+        // seperation from nearby
+        Vector2 seperation = CalculateSeperation(
+            currentPosition,
+            desiredDirection
+        );
+
+        //Combine 
+        Vector2 combinedDirection = desiredDirection + seperation;
+
+        Vector2 finalDirection =
+            combinedDirection.sqrMagnitude > 0.0001f
+                ? combinedDirection.normalized
+                : desiredDirection;
+
+        // check so doesnt go into wall
+        float checkDistance = moveSpeed * Time.fixedDeltaTime + 0.05f;
+
+        bool steeringBlocked =
+            rb.Cast(
+                finalDirection,
+                wallFilter,
+                wallHits,
+                checkDistance
+            ) > 0;
+
+        if (steeringBlocked)
+        {
+            finalDirection = desiredDirection;
+        }
+
+        // 7 apply
+        rb.linearVelocity = finalDirection * moveSpeed;
+
     }
 
-    //5 check if the destination is blocked - >> Debugging 
-    Vector2 toWaypoint = destination - currentPosition;
+    private Vector2 CalculateSeperation(Vector2 position, Vector2 desiredDirection)
+    {
+        float ownRadius = CollisionsRadius;
+        float searchRadius = ownRadius * 3f + seperationPadding;
 
-    bool waypointBlocked =
-        toWaypoint.sqrMagnitude > 0.0001f &&
-        rb.Cast(
-            toWaypoint.normalized,
-            wallFilter,
-            wallHits,
-            toWaypoint.magnitude
-        ) > 0;
+        int count = Physics2D.OverlapCircle(position, searchRadius, enemyFilter, nearbyEnemies);
 
-    Debug.DrawLine(
-        currentPosition,
-        destination,
-        waypointBlocked ? Color.magenta : Color.cyan
-    );
+        Vector2 separation = Vector2.zero;
+
+        for(int i = 0; i < count; i++)
+        {
+            Collider2D other = nearbyEnemies[i];
+
+            //ignore self
+            if (other == null || other.attachedRigidbody == rb)
+                continue;
+
+            Vector2 away = position - (Vector2)other.bounds.center;
+            float distance = away.magnitude;
+
+            if (distance < 0.001f)
+                continue;
+
+            float otherRadius = Mathf.Max(other.bounds.extents.x, other.bounds.extents.y);
+
+            float desiredDistance = ownRadius + otherRadius + seperationPadding;
+
+            if (distance >= desiredDistance)
+                continue;
+
+            float strength = 1f - distance / desiredDistance;
+
+            //push away 
+            separation += away.normalized * strength;
 
 
-    // 6 move to destination
-    Vector2 direction = destination - currentPosition;
-    rb.linearVelocity = direction.normalized * moveSpeed;
-}
+            //pref movement around other
+            if(Vector2.Dot(desiredDirection, -away.normalized) > 0.7f)
+            {
+                Vector2 sideways = new Vector2(-desiredDirection.y, desiredDirection.x);
+
+                separation += sideways * seperationSide * strength * 0.6f;
+            }
+        }
+
+        return Vector2.ClampMagnitude(separation, 1f) * seperationStrength;
+    }
 
 }

@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     [Header("References")]
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     private Transform playerTransform;
     private GridNavigation navigation;
     private Vector2Int lastPlayerCell;
+
 
     private void Start()
     {
