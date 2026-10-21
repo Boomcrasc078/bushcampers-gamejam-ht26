@@ -11,21 +11,41 @@ public class EnemyMovement : MonoBehaviour
     private Transform target;
     private WorldGeneration world;
     private GridNavigation navigation;
+    private Vector2Int? currentWaypoint;
+
+    private readonly RaycastHit2D[] wallHits = new RaycastHit2D[8];
+    private ContactFilter2D wallFilter;
+
+    private CircleCollider2D bodyCollider;
+
 
     private void Awake()
     {
+        bodyCollider = GetComponent<CircleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+
+        wallFilter = new ContactFilter2D();
+        wallFilter.SetLayerMask(wallLayer);
+        wallFilter.useTriggers = false;
     }
 
-    public void Initialize(
-        Transform target,
-        WorldGeneration world,
-        GridNavigation navigation)
+    public void Initialize(Transform target,WorldGeneration world,GridNavigation navigation)
     {
         this.target = target;
         this.world = world;
         this.navigation = navigation;
     }
+
+    public float CollisionsRadius
+    {
+        get
+        {
+            Vector3 scale = bodyCollider.transform.lossyScale;
+
+            return bodyCollider.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.y));
+        }
+    }
+    
 
     private void FixedUpdate()
     {
@@ -41,15 +61,9 @@ public class EnemyMovement : MonoBehaviour
 
         Vector2 toPlayer = targetPosition - currentPosition;
 
-        RaycastHit2D wallHit = Physics2D.CircleCast(
-            currentPosition,
-            0.5f,
-            toPlayer.normalized,
-            toPlayer.magnitude,
-            wallLayer
-        );
-
-        bool wallBetween = wallHit.collider != null;
+        bool wallBetween =
+            toPlayer.sqrMagnitude > 0.0001f &&
+            rb.Cast(toPlayer.normalized,wallFilter,wallHits,toPlayer.magnitude) > 0;
 
         Debug.DrawLine(
             currentPosition,
@@ -62,6 +76,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (!wallBetween)
         {
+            currentWaypoint = null;
             if (Vector2.Distance(currentPosition, targetPosition) <= stoppingDistance)
             {
                 rb.linearVelocity = Vector2.zero;
@@ -70,18 +85,38 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Vector2Int currentCell = world.WorldToCell(transform.position);
-            Vector2Int nextCell = navigation.GetNextCell(currentCell);
-
-            if (nextCell == currentCell)
+            if (currentWaypoint == null || Vector2.Distance(currentPosition, world.CellToWorld(currentWaypoint.Value)) < 0.1f)
             {
-                rb.linearVelocity = Vector2.zero;
-                return;
-            }
+                Vector2Int currentCell = world.WorldToCell(transform.position);
 
-            destination = world.CellToWorld(nextCell);
+                Vector2Int nextCell = navigation.GetNextCell(currentCell);
+
+                if(nextCell == currentCell)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                    return;
+                }
+
+                currentWaypoint = nextCell;
+            }
+            destination = world.CellToWorld(currentWaypoint.Value);
         }
-        Debug.DrawLine(currentPosition, destination, Color.cyan);
+        Vector2 toWaypoint = destination - currentPosition;
+
+        bool waypointBlocked =
+            toWaypoint.sqrMagnitude > 0.0001f &&
+            rb.Cast(
+                toWaypoint.normalized,
+                wallFilter,
+                wallHits,
+                toWaypoint.magnitude
+            ) > 0;
+
+        Debug.DrawLine(
+            currentPosition,
+            destination,
+            waypointBlocked ? Color.magenta : Color.cyan
+        );
 
         Vector2 direction = destination - currentPosition;
 

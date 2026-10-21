@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private CameraMovement cameraMovement;
 
+    [SerializeField] private LayerMask wallLayer;
+
     private Transform playerTransform;
     private GridNavigation navigation;
     private Vector2Int lastPlayerCell;
@@ -77,12 +79,24 @@ public class GameManager : MonoBehaviour
 
     private void InitializeNavigation()
     {
-        navigation = new GridNavigation(worldGeneration.CurrentWorld);
+        CircleCollider2D enemyCollider = enemyPrefab.GetComponent<CircleCollider2D>();
+
+        if(enemyCollider == null)
+        {
+            Debug.LogError("no collider on prefab");
+            return;
+        }
+
+        Vector3 scale = enemyCollider.transform.lossyScale;
+
+        float radius = enemyCollider.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.y));
+
+        navigation = new GridNavigation(worldGeneration, radius, wallLayer);
 
         Vector2Int playerCell = worldGeneration.WorldToCell(playerTransform.position);
 
-        navigation.BuildDistanceField(playerCell);
-
         lastPlayerCell = playerCell;
+
+        navigation.BuildDistanceField(playerCell);
     }
 }

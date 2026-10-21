@@ -38,6 +38,13 @@ public class WorldRenderer : MonoBehaviour
                 }
             }
         }
+
+        TilemapCollider2D wallCollider = wallTilemap.GetComponent<TilemapCollider2D>();
+
+        if(wallCollider != null)
+        {
+            wallCollider.ProcessTilemapChanges(); // process it instantly instead of lateupdate. FUCK UNITY TILES AHH
+        }
     }
     public Vector3 GetCellCenterWorld(Vector2Int cell)
     {

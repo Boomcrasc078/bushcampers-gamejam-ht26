@@ -6,6 +6,16 @@ public class GridNavigation
     private WorldGrid world;
     private int[,] distances;
 
+    private WorldGeneration worldGeneration;
+    private float collisionRadius;
+    private LayerMask wallLayer;
+
+
+    //0 -> not checked 1-> allowed -1 -> blocked ?
+    private sbyte[,] cellCache;
+    private sbyte[,,] stepCache;
+
+
     private static readonly Vector2Int[] directions =
     {
         Vector2Int.up,
@@ -19,36 +29,83 @@ public class GridNavigation
         new Vector2Int(-1, -1)
     };
 
-    public GridNavigation(WorldGrid world)
+    public GridNavigation(WorldGeneration worldGeneration, float collisionRadius, LayerMask wallLayer)
     {
-        this.world = world;
+        this.worldGeneration = worldGeneration;
+        this.world = worldGeneration.CurrentWorld;
+        this.collisionRadius = collisionRadius;
+        this.wallLayer = wallLayer;
+
         distances = new int[world.Width, world.Height];
+
+        cellCache = new sbyte[world.Width, world.Height];
+        stepCache = new sbyte[world.Width, world.Height, 8];
+    
     }
 
     public bool IsWalkable(Vector2Int cell)
     {
-        return world.IsInBounds(cell.x, cell.y) && world.GetCell(cell.x, cell.y) == CellType.Floor;
+        if (!world.IsInBounds(cell.x, cell.y))
+            return false;
+
+        if (world.GetCell(cell.x, cell.y) != CellType.Floor)
+            return false;
+
+        //return prev calc result >:)
+        if (cellCache[cell.x, cell.y] != 0)
+            return cellCache[cell.x, cell.y] == 1;
+
+        Vector2 position = worldGeneration.CellToWorld(cell);
+
+        bool canFit = Physics2D.OverlapCircle(position, collisionRadius, wallLayer) == null;
+
+        return canFit;
     }
 
     private bool CanStep(Vector2Int from, Vector2Int direction)
     {
         Vector2Int next = from + direction;
 
-        if (!IsWalkable(next))
+        if (!IsWalkable(from) || !IsWalkable(next))
             return false;
 
-        //diagonal cannot cut corners!
+        int directionIndex = System.Array.IndexOf(directions, direction);
 
+        if (directionIndex == -1)
+            return false;
+
+        //resue prev if there
+        sbyte cached = stepCache[from.x, from.y, directionIndex];
+
+        if (cached != 0)
+            return cached == 1;
+
+        bool canMove = true;
+
+        //prevent diagonal
         if(direction.x != 0 && direction.y != 0)
         {
             Vector2Int horizontal = from + new Vector2Int(direction.x, 0);
             Vector2Int vertical = from + new Vector2Int(0, direction.y);
 
             if (!IsWalkable(horizontal) || !IsWalkable(vertical))
-                return false;
+                canMove = false;
         }
 
-        return true;
+        //check if col fits :I
+        if (canMove)
+        {
+            Vector2 start = worldGeneration.CellToWorld(from);
+            Vector2 end = worldGeneration.CellToWorld(next);
+
+            Vector2 movement = end - start;
+
+            RaycastHit2D hit = Physics2D.CircleCast(start, collisionRadius, movement.normalized, movement.magnitude, wallLayer);
+
+            canMove = hit.collider == null;
+        }
+        stepCache[from.x, from.y, directionIndex] = (sbyte)(canMove ? 1 : -1);
+        return canMove;
 
     }
 
