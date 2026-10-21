@@ -150,8 +150,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopUpgradeManager
   upgrades:
   - {fileID: 959388958}
-  - {fileID: 959388959}
+  - {fileID: 0}
   - {fileID: 959388960}
+  - {fileID: 0}
+  - {fileID: 959388959}
+  - {fileID: 0}
 --- !u!4 &268428450
 Transform:
   m_ObjectHideFlags: 0
@@ -576,6 +579,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f75532ef3b414f8db0dd134de806db6, type: 2}
   - {fileID: 11400000, guid: 154510acce46347b184ee59a7bab62eb, type: 2}
   - {fileID: 11400000, guid: 9b370a80dad8a483fa084dbd94326c21, type: 2}
+  - {fileID: 11400000, guid: 975bc0b2a9d8243e8ad7d35f18f7a051, type: 2}
+  - {fileID: 11400000, guid: f78e5f4431aa14b34a8768e3a5c13059, type: 2}
+  - {fileID: 11400000, guid: e428bee08954248a5b61e289b6f52027, type: 2}
   shopItemPrefab: {fileID: 4342271545775392125, guid: 94e2a7664ab8042e0b6d70c3fb35f91f, type: 3}
 --- !u!1001 &678724989
 PrefabInstance:
@@ -983,6 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   mainGameObject: {fileID: 959388947}
+  startingHealth: 10
 --- !u!114 &959388958
 MonoBehaviour:
   m_ObjectHideFlags: 0
