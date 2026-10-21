@@ -48,4 +48,9 @@ public class Health : MonoBehaviour
         }
         Destroy(mainGameObject);
     }
+
+    public void Initialize(float maxHealth)
+    {
+        healthAmount = maxHealth;
+    }
 }

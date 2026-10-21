@@ -1,45 +1,46 @@
-using System.Linq;
+
 using UnityEngine;
-[RequireComponent(typeof(PlayerInput))]
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float baseSpeed = 300f;
+    [SerializeField] private float moveSpeed = 5f;
+
     private PlayerInput playerInput;
     private Rigidbody2D rigidbody2D;
     private SpeedUpgrade speedUpgrade;
 
-    void Awake()
+    private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         speedUpgrade = GetComponent<SpeedUpgrade>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
     }
 
-    void Move()
+    private void Move()
     {
-        float speed = baseSpeed;
+        Vector2 direction =
+            Vector2.ClampMagnitude(playerInput.GetMoveInput(), 1f);
 
-        speed *= GetSpeedUpgrade();
+        float speed = moveSpeed * GetSpeedUpgrade();
 
-        rigidbody2D.AddForce(playerInput.GetMoveInput() * Time.deltaTime * speed);
+        rigidbody2D.linearVelocity = direction * speed;
     }
 
-    float GetSpeedUpgrade()
+    private float GetSpeedUpgrade()
     {
-        if (speedUpgrade != null)
+        if (speedUpgrade != null &&
+            ShopUpgradeManager.instance != null &&
+            ShopUpgradeManager.instance.ActivatedUpgrades.Contains(speedUpgrade))
         {
-            if (ShopUpgradeManager.instance.ActivatedUpgrades.Contains(speedUpgrade))
-            {
-                return speedUpgrade.GetUpgradeMultiplier();
-            }
+            return speedUpgrade.GetUpgradeMultiplier();
         }
+
         return 1f;
     }
 }
