@@ -336,14 +336,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc926aef9bcb494894e990378960b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  minSpawnDistance: 6
-  maxSpawnDistance: 15
+  minSpawnDistance: 16
+  maxSpawnDistance: 25
   spawnPadding: 0.2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   spawnCamera: {fileID: 2132013782}
-  offscreenPadding: 0.3
+  offscreenPadding: 0.1
 --- !u!1 &486023432
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,9 +679,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8f87408a271c54491049fc127d637d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunManager
-  basicEnemy: {fileID: 11400000, guid: be8331757b875e84f950b359f7ac736a, type: 2}
-  spawnInterval: 30
-  startingSpawnCount: 3
+  enemyTypes:
+  - enemy: {fileID: 11400000, guid: be8331757b875e84f950b359f7ac736a, type: 2}
+    unlockTime: 0
+  - enemy: {fileID: 11400000, guid: f26b8b03c81751c40ab06c2cd171a005, type: 2}
+    unlockTime: 0
+  spawnInterval: 5
+  startingSpawnCount: 10
   maxAliveEnemies: 100
   difficultyIncreaseInterval: 30
   extraEnemiesPerIncrease: 1

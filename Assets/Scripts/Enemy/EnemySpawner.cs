@@ -136,8 +136,24 @@ public class EnemySpawner : MonoBehaviour
 
             if(meleeattack != null)
             {
-                meleeattack.Initialize(player, enemyType.damage);
+                meleeattack.Initialize(player, enemyType);
             }
+
+            EnemyRangedAttack rangedAttack = enemy.GetComponent<EnemyRangedAttack>();
+
+            if (rangedAttack != null)
+            {
+                rangedAttack.Initialize(player, enemyType);
+            }
+
+
+            Shooting shooting = enemy.GetComponent<Shooting>();
+
+            if (shooting != null)
+            {
+                shooting.Initialize(enemyType.damage);
+            }
+
 
 
             spawnedPositions.Add(spawnPosition2D);

@@ -12,6 +12,9 @@ public class EnemyDefinition : ScriptableObject
     public float moveSpeed = 3f;
     public float damage = 1f;
 
+    [Header("Combat")]
+    public float attackRange = 1.5f;
+
     [Header("Spawning")]
     public float spawnWeight = 1f;
 }

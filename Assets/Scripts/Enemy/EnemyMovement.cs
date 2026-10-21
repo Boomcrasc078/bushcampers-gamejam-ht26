@@ -30,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
     private CircleCollider2D bodyCollider;
 
     private EnemyMeleeAttack meleeAttack;
+    private EnemyRangedAttack rangedAttack;
 
 
 
@@ -48,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
         enemyFilter.useTriggers = false;
 
         meleeAttack = GetComponent<EnemyMeleeAttack>();
+        rangedAttack = GetComponent<EnemyRangedAttack>();
 
     }
 
@@ -80,13 +82,20 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        // stop moving when attack 
-        if (meleeAttack != null && meleeAttack.ShouldStopMoving)
+
+        bool stopForMelee =
+            meleeAttack != null && meleeAttack.ShouldStopMoving;
+
+        bool stopForRanged =
+            rangedAttack != null && rangedAttack.ShouldStopMoving;
+
+        if (stopForMelee || stopForRanged)
         {
             currentWaypoint = null;
             rb.linearVelocity = Vector2.zero;
             return;
         }
+
 
         Vector2 currentPosition = rb.position;
         Vector2 targetPosition = target.position;

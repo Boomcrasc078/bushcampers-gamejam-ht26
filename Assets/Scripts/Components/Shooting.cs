@@ -11,6 +11,9 @@ public class Shooting : MonoBehaviour
     IShooting shootingInterface;
     private ShootingRateUpgrade shootingRateUpgrade;
 
+    private float bulletDamage = 1f;
+
+
     void Awake()
     {
         shootingInterface = GetComponent<IShooting>();
@@ -41,7 +44,6 @@ public class Shooting : MonoBehaviour
             yield return null;
         }
     }
-
     private void Shoot()
     {
         var bullets = shootingType.bulletsPerShot;
@@ -51,16 +53,24 @@ public class Shooting : MonoBehaviour
             var spreadAngle = Random.Range(-spread / 2f, spread / 2f);
             var bulletRotation = rotationTransform.rotation * Quaternion.Euler(0f, 0f, spreadAngle);
             var bullet = GameObject.Instantiate(bulletPrefab, firePositionTransform.position, bulletRotation);
+
+            Bullet bulletComponent = bullet.GetComponent<Bullet>();
+
+            if(bulletComponent != null)
+            {
+                bulletComponent.Initialize(bulletDamage);
+            }
+
             var bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
 
             bulletRigidbody.AddRelativeForce(Vector2.up * shootingType.bulletSpeed);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(float damage)
     {
-
+        bulletDamage = damage;
     }
+
 
 }

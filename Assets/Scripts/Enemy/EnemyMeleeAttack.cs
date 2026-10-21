@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyMeleeAttack : MonoBehaviour
 {
     [Header("Attack")]
-    [SerializeField] private float attackRange = 1.1f;
     [SerializeField] private float windupDuration = 0.45f;
     [SerializeField] private float recoveryDuration = 0.6f;
     [SerializeField] private float attackCooldown = 0.3f;
@@ -20,10 +19,14 @@ public class EnemyMeleeAttack : MonoBehaviour
     private Transform target;
     private Health targetHealth;
     private float damage;
+    private float attackRange;
+
 
     private bool isAttacking;
     private float nextAttackTime;
     private Color originalColor;
+    
+
 
     // Used by EnemyMovement to decide when to stop.
     public bool ShouldStopMoving =>
@@ -35,11 +38,13 @@ public class EnemyMeleeAttack : MonoBehaviour
             originalColor = warningSprite.color;
     }
 
-    public void Initialize(Transform player, float attackDamage)
+    public void Initialize(Transform player, EnemyDefinition definition)
     {
         target = player;
         targetHealth = player.GetComponentInChildren<Health>();
-        damage = attackDamage;
+
+        damage = definition.damage;
+        attackRange = definition.attackRange;
     }
 
     private void Update()

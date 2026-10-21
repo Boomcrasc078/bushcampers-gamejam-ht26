@@ -65,9 +65,6 @@ public class GameManager : MonoBehaviour
 
         lastPlayerCell = currentCell;
 
-        Debug.Log($"Player cell: {currentCell}, " +
-          $"Walkable for enemy: {navigation.IsWalkable(currentCell)}");
-
         navigation.BuildDistanceField(currentCell);
     }
 
