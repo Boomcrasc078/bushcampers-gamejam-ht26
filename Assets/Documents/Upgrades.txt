@@ -72,15 +72,16 @@ Upgrade Text: Purchase
 --------------------------------------
 
 ----------------INDEX 5---------------
-
+Upgrade Clock Speed Power Booster
 
 Description: 
+Better booster for the processor clock speed. This enables faster processing and learning of training sources.
 
 Vad den faktiskt gör: Större chans för powerups att spawna
 
-Base cost: 0 Bytes
-Item Cost Multiplier: 1
-Purchase Text: Install
+Base cost: 74 Bytes
+Item Cost Multiplier: 1.2
+Purchase Text: Upgrade
 Upgrade Text: Upgrade
 --------------------------------------
 
