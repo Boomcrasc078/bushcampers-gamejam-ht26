@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : MonoBehaviour
 {
-    [Header("Attack")]
-    [SerializeField] private float windupDuration = 0.45f;
-    [SerializeField] private float recoveryDuration = 0.6f;
-    [SerializeField] private float attackCooldown = 0.3f;
-    [SerializeField] private LayerMask wallLayer;
-
-    [Header("Visual Feedback")]
+    [Header("Visuals")]
     [SerializeField] private SpriteRenderer warningSprite;
-    [SerializeField]
-    private Color warningColor =
-        new Color(1f, 0.4f, 0.4f);
+    [SerializeField] private Color warningColor = Color.black;
+    [SerializeField] private ParticleSystem attackParticles;
+
+    [Header("Collision")]
+    [SerializeField] private LayerMask wallLayer;
 
     private Transform target;
     private Health targetHealth;
+    private PlayerMovement playerMovement;
+
     private float damage;
     private float attackRange;
+    private float windupDuration;
+    private float recoveryDuration;
+    private float attackCooldown;
+    private float knockbackStrength;
 
-
-    private bool isAttacking;
     private float nextAttackTime;
+    private bool isAttacking;
     private Color originalColor;
-    
 
-
-    // Used by EnemyMovement to decide when to stop.
     public bool ShouldStopMoving =>
         isAttacking || IsPlayerInRange();
 
@@ -42,9 +40,15 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         target = player;
         targetHealth = player.GetComponentInChildren<Health>();
+        playerMovement = player.GetComponent<PlayerMovement>();
 
         damage = definition.damage;
         attackRange = definition.attackRange;
+
+        windupDuration = definition.attackWindup;
+        recoveryDuration = definition.attackRecovery;
+        attackCooldown = definition.attackCooldown;
+        knockbackStrength = definition.knockbackStrength;
     }
 
     private void Update()
@@ -61,15 +65,11 @@ public class EnemyMeleeAttack : MonoBehaviour
         if (target == null || targetHealth == null)
             return false;
 
-        float distance = Vector2.Distance(
-            transform.position,
-            target.position
-        );
+        Vector2 direction = target.position - transform.position;
 
-        if (distance > attackRange)
+        if (direction.sqrMagnitude > attackRange * attackRange)
             return false;
 
-        // walls!
         return Physics2D.Linecast(
             transform.position,
             target.position,
@@ -81,24 +81,51 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         isAttacking = true;
 
-        // show that hes attacking :)
+        // WIND-UP
         if (warningSprite != null)
             warningSprite.color = warningColor;
 
         yield return new WaitForSeconds(windupDuration);
 
-        // normal
         if (warningSprite != null)
             warningSprite.color = originalColor;
 
-        // player can dodge now, was impossible before :))))))
+        // ATTACK
+        PlayAttackParticles();
+
         if (IsPlayerInRange())
+        {
             targetHealth.TakeDamage(damage);
 
-        // enemy waits and stands still so you can "escape". 
+            if (knockbackStrength > 0f && playerMovement != null)
+            {
+                Vector2 direction =
+                    target.position - transform.position;
+
+                if (direction.sqrMagnitude < 0.001f)
+                    direction = Vector2.up;
+
+                playerMovement.ApplyKnockback(
+                    direction.normalized * knockbackStrength
+                );
+            }
+        }
+
+        // RECOVERY
         yield return new WaitForSeconds(recoveryDuration);
 
         isAttacking = false;
         nextAttackTime = Time.time + attackCooldown;
+    }
+
+    private void PlayAttackParticles()
+    {
+        if (attackParticles == null)
+            return;
+
+        var shape = attackParticles.shape;
+        shape.radius = attackRange;
+
+        attackParticles.Play();
     }
 }

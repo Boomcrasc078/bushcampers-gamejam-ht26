@@ -684,6 +684,8 @@ MonoBehaviour:
     unlockTime: 0
   - enemy: {fileID: 11400000, guid: f26b8b03c81751c40ab06c2cd171a005, type: 2}
     unlockTime: 0
+  - enemy: {fileID: 11400000, guid: 16b66848abe3bfe46a54431d58b6e803, type: 2}
+    unlockTime: 0
   spawnInterval: 5
   startingSpawnCount: 10
   maxAliveEnemies: 100

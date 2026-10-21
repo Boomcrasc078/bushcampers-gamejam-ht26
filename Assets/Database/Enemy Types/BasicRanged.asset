@@ -15,7 +15,11 @@ MonoBehaviour:
   enemyName: Enemy Ranged
   prefab: {fileID: 8539630631189862239, guid: 4e958737c763f0e46b923e99b4551707, type: 3}
   maxHealth: 6
-  moveSpeed: 2.5
+  moveSpeed: 3
   damage: 1
   attackRange: 7
+  attackWindup: 0.45
+  attackRecovery: 0.6
+  attackCooldown: 0.3
+  knockbackStrength: 0
   spawnWeight: 4

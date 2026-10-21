@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float knockbackRecovery = 25f;
+
+    private Vector2 knockbackVelocity;
 
     private PlayerInput playerInput;
     private Rigidbody2D rigidbody2D;
@@ -43,4 +46,14 @@ public class PlayerMovement : MonoBehaviour
 
         return 1f;
     }
+
+
+    public void ApplyKnockback(Vector2 velocity)
+    {
+        knockbackVelocity = Vector2.ClampMagnitude(
+            knockbackVelocity + velocity,
+            12f
+        );
+    }
+
 }
