@@ -49,11 +49,13 @@ public class EnemyMovement : MonoBehaviour
         seperationSide = Random.value < 0.5f ? 1f : -1f;
     }
 
-    public void Initialize(Transform target,WorldGeneration world,GridNavigation navigation)
+    public void Initialize(Transform target,WorldGeneration world,GridNavigation navigation, EnemyDefinition definition)
     {
         this.target = target;
         this.world = world;
         this.navigation = navigation;
+
+        moveSpeed = definition.moveSpeed;
     }
 
     public float CollisionsRadius

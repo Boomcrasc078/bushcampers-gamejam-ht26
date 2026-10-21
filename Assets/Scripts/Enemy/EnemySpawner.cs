@@ -119,7 +119,18 @@ public class EnemySpawner : MonoBehaviour
                 break;
             }
 
-            movement.Initialize(player, world, navigation);
+            movement.Initialize(player, world, navigation, enemyType);
+
+            Health health = enemy.GetComponentInChildren<Health>();
+
+            if(health != null)
+            {
+                health.Initialize(enemyType.maxHealth);
+            }
+            else
+            {
+                Debug.LogWarning($"Enemy {enemyType.enemyName} has no health component");
+            }
 
             spawnedPositions.Add(spawnPosition2D);
             spawned++;
