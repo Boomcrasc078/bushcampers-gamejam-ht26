@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private LayerMask wallLayer;
 
+    [SerializeField] private EnemyDefinition basicEnemy;
+
     private Transform playerTransform;
     private GridNavigation navigation;
     private Vector2Int lastPlayerCell;
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeNavigation()
     {
-        CircleCollider2D enemyCollider = enemyPrefab.GetComponent<CircleCollider2D>();
+        CircleCollider2D enemyCollider = basicEnemy.prefab.GetComponent<CircleCollider2D>();
 
         if(enemyCollider == null)
         {
