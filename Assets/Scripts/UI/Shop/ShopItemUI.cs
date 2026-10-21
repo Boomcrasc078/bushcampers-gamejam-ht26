@@ -42,15 +42,19 @@ public class ShopItemUI : MonoBehaviour
 
     void Update()
     {
-        if (upgradeManager.ActivatedUpgrades.Contains(upgrade))
+        if (upgrade != null)
         {
-            itemButtonText.text = shopItem.upgradeText;
-        }
-        else
-        {
-            itemButtonText.text = shopItem.purchaseText;
-        }
+            if (upgradeManager.ActivatedUpgrades.Contains(upgrade))
+            {
+                itemButtonText.text = shopItem.upgradeText;
+            }
+            else
+            {
+                itemButtonText.text = shopItem.purchaseText;
+            }
 
-        itemCostText.text = $"{TrainingDataDisplay.FormatTrainingData(GetCost())} REQUIRED";
+            itemCostText.text = $"{TrainingDataDisplay.FormatTrainingData(GetCost())} REQUIRED";
+
+        }
     }
 }
