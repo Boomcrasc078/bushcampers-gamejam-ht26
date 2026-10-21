@@ -3,5 +3,5 @@ using UnityEngine.InputSystem;
 
 public interface IShooting
 {
-    public Action Shoot { get; set; }
+    public bool IsShooting();
 }

@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 1639524389899839362}
   - component: {fileID: 7966640355639335518}
   - component: {fileID: 6010447014938375663}
+  - component: {fileID: 7340133148440514434}
   m_Layer: 7
   m_Name: EnemyHealth
   m_TagString: Untagged
@@ -170,6 +171,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   mainGameObject: {fileID: 7473851510182007783}
+--- !u!114 &7340133148440514434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297882259665328150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ac8594c5bbf447090a8aa22e279123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrainingDataDrop
+  traningDataDropAmount: 128
+  trainingDataPickupPrefab: {fileID: 1465018671966647561, guid: cdf28aa2e42b54daf99bcebbbb737367, type: 3}
 --- !u!1 &7473851510182007783
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,8 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e601bdf02ece43f2a0738785780b1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyInput
-  rateOfFire: 1
-  shootTickerEnabled: 1
 --- !u!114 &4703576278613363917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d6b19a2185f4e47bed5e5c2d499797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooting
+  shootingType: {fileID: 11400000, guid: 22cd7119dddff461e9d37c0a10feaca7, type: 2}
   bulletPrefab: {fileID: 6701484596721332199, guid: 30d2de2b251044ebf9957ecc3aaed800, type: 3}
   rotationTransform: {fileID: 5601101712990778187}
   firePositionTransform: {fileID: 2561810416744576933}

@@ -32,15 +32,65 @@ public class WorldGeneration : MonoBehaviour
     public List<Vector2Int> RewardSpawnCells { get; private set; }
 
     private List<RectInt> rooms;
+    private MapEnlargmentUpgrade mapEnlargmentUpgrade;
+    private RoomIncreaseUpgrade roomIncreaseUpgrade;
+    void Awake()
+    {
+        mapEnlargmentUpgrade = GetComponent<MapEnlargmentUpgrade>();
+        roomIncreaseUpgrade = GetComponent<RoomIncreaseUpgrade>();
+    }
 
+
+    private int UpdateRoomCount(int currentCount)
+    {
+        float roomCountFloat = currentCount;
+
+        if (ShopUpgradeManager.instance == null)
+        {
+            return currentCount;
+        }
+
+        if (ShopUpgradeManager.instance.ActivatedUpgrades.Contains(roomIncreaseUpgrade))
+        {
+            return Mathf.RoundToInt(roomCountFloat *= roomIncreaseUpgrade.GetRoomIncreaseUpgrade());
+        }
+        else
+        {
+            return currentCount;
+        }
+    }
+
+    private int UpdateRoomSize(int currentSize)
+    {
+        float currentSizeFloat = currentSize;
+
+        if (ShopUpgradeManager.instance == null)
+        {
+            return currentSize;
+        }
+
+        if (ShopUpgradeManager.instance.ActivatedUpgrades.Contains(mapEnlargmentUpgrade))
+        {
+            return Mathf.RoundToInt(currentSizeFloat *= mapEnlargmentUpgrade.GetMapSizeUpgrade());
+        }
+        else
+        {
+            return currentSize;
+        }
+
+    }
 
     public void GenerateWorld()
     {
-        if(corridorWidth < 1)
+        if (corridorWidth < 1)
         {
             Debug.LogError("Corridor width must be at least 1");
             return;
         }
+
+        var roomCount = UpdateRoomCount(this.roomCount);
+        var width = UpdateRoomSize(this.width);
+        var height = UpdateRoomSize(this.height);
 
         // 1. Create the world grid (initially all walls)
         WorldGrid world = new WorldGrid(width, height);
@@ -65,7 +115,7 @@ public class WorldGeneration : MonoBehaviour
 
         // 3. Carve rooms into the world
         CarveRooms(world, rooms);
-        
+
         // 4. Connect rooms with corridors
         CorridorGenerator corridorGenerator = new CorridorGenerator();
 
@@ -168,7 +218,7 @@ public class WorldGeneration : MonoBehaviour
 
         System.Random random = new System.Random(seed + 1000);
 
-        for(int i = 0; i < rooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
             if (i == spawnRoomIndex)
                 continue;
@@ -217,12 +267,12 @@ public class WorldGeneration : MonoBehaviour
             UnityEditor.Handles.Label(center, $"Room {i}");
         }
 
-        if(CurrentWorld != null)
+        if (CurrentWorld != null)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(SpawnWorldPosition, 0.75f);
 
-            UnityEditor.Handles.Label(SpawnWorldPosition + Vector3.up*3f, "PLAYER SPAWN");
+            UnityEditor.Handles.Label(SpawnWorldPosition + Vector3.up * 3f, "PLAYER SPAWN");
         }
 
         if (CurrentWorld != null && RewardSpawnCells != null)
