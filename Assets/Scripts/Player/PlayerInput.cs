@@ -7,20 +7,17 @@ public class PlayerInput : MonoBehaviour, IShooting
     [SerializeField] InputActionReference moveInput;
     [SerializeField] InputActionReference attackInput;
 
-    public Action Shoot { get; set; }
-
-    void OnEnable() => attackInput.action.started += OnAttackStarted;
-    void OnDisable() => attackInput.action.started -= OnAttackStarted;
-
-    void OnAttackStarted(InputAction.CallbackContext context) => InvokeShoot(context);
-
-    void InvokeShoot(InputAction.CallbackContext context)
+    public bool IsShooting()
     {
-        Shoot.Invoke();
+        return GetShootInput();
     }
-
     void Update()
     {
+    }
+
+    public bool GetShootInput()
+    {
+        return attackInput.action.IsPressed();
     }
 
     public Vector2 GetMoveInput()

@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c1de8d738e4496292f49f3ce064bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingDataPickup
-  pickupDistance: 3
-  pickupSpeed: 3
+  pullDistance: 3
+  pullSpeed: 3
+  pickupDistance: 1
 --- !u!1 &6305601693817693479
 GameObject:
   m_ObjectHideFlags: 0

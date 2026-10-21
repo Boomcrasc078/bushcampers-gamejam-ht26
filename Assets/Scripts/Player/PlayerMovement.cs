@@ -40,6 +40,6 @@ public class PlayerMovement : MonoBehaviour
                 return speedUpgrade.GetUpgradeMultiplier();
             }
         }
-        return 0f;
+        return 1f;
     }
 }

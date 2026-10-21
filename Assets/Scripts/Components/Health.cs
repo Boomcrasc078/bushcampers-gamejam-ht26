@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem.Composites;
 using UnityEngine.Video;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private GameObject mainGameObject;
-    private float healthAmount = 10f;
+    [SerializeField] private float startingHealth = 10f;
+    private float healthAmount;
     private HealthUpgrade healthUpgrade;
 
     void Awake()
@@ -23,6 +25,7 @@ public class Health : MonoBehaviour
 
     void Start()
     {
+        healthAmount = startingHealth;
         healthAmount += GetHealthUpgrade();
     }
 
@@ -38,7 +41,11 @@ public class Health : MonoBehaviour
     void Die()
     {
         var onDeath = GetComponent<IOnDeath>();
-        onDeath.OnDeath();
+        if (onDeath != null)
+        {
+            onDeath.OnDeath();
+
+        }
         Destroy(mainGameObject);
     }
 }

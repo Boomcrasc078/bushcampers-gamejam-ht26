@@ -16,11 +16,23 @@ public class TrainingDataPickup : MonoBehaviour
 
     void Awake()
     {
-        playerTransform = FindAnyObjectByType<PlayerMovement>().transform;
+        var player = FindAnyObjectByType<PlayerMovement>();
+
+        playerTransform = player != null ? player.transform : null;
     }
 
     void Update()
     {
+        Loop();
+    }
+
+    void Loop()
+    {
+        if (playerTransform == null)
+        {
+            return;
+        }
+
         var distance = Vector2.Distance(transform.position, playerTransform.position);
         if (distance < pullDistance)
         {
