@@ -58,6 +58,7 @@ public class GridNavigation
         Vector2 position = worldGeneration.CellToWorld(cell);
 
         bool canFit = Physics2D.OverlapCircle(position, collisionRadius, wallLayer) == null;
+        cellCache[cell.x, cell.y] = (sbyte)(canFit ? 1 : -1);
 
         return canFit;
     }
@@ -92,7 +93,7 @@ public class GridNavigation
                 canMove = false;
         }
 
-        //check if col fits :I
+        //check if col fits :P
         if (canMove)
         {
             Vector2 start = worldGeneration.CellToWorld(from);
@@ -107,6 +108,52 @@ public class GridNavigation
         stepCache[from.x, from.y, directionIndex] = (sbyte)(canMove ? 1 : -1);
         return canMove;
 
+    }
+
+    //? betyder att den kan returna null också :I
+    private Vector2Int? FindNearestWalkableTarget(Vector2Int target)
+    {
+        Vector2 targetPosition = worldGeneration.CellToWorld(target);
+
+        //search outwards
+        for(int radius = 1; radius <=6; radius++)
+        {
+            Vector2Int? bestCell = null;
+            float bestDistance = float.MaxValue;
+
+            for(int x = -radius; x <=radius; x++)
+            {
+                for(int y = -radius; y <= radius; y++)
+                {
+                    // only check outer
+                    if (Mathf.Max(Mathf.Abs(x), Mathf.Abs(y)) != radius)
+                        continue;
+
+                    Vector2Int candidate = target + new Vector2Int(x, y);
+
+                    if (!IsWalkable(candidate))
+                        continue;
+
+                    Vector2 candidatePosition = worldGeneration.CellToWorld(candidate);
+
+                    //avoid going through wall ... dumb fuck moron i am
+
+                    if (Physics2D.Linecast(targetPosition, candidatePosition, wallLayer).collider != null)
+                        continue;
+
+                    float distance = (candidatePosition - targetPosition).sqrMagnitude;
+
+                    if(distance < bestDistance)
+                    {
+                        bestDistance = distance;
+                        bestCell = candidate;
+                    }
+                }
+            }
+            if (bestCell.HasValue)
+                return bestCell;
+        }
+        return null;
     }
 
 
@@ -124,7 +171,14 @@ public class GridNavigation
         }
 
         if (!IsWalkable(targetCell))
-            return;
+        {
+            Vector2Int? replacement = FindNearestWalkableTarget(targetCell);
+
+            if (!replacement.HasValue)
+                return;
+
+            targetCell = replacement.Value;
+        }
 
         // Sorted by cost, then coordinates.
         SortedSet<(int cost, int x, int y)> open = new();

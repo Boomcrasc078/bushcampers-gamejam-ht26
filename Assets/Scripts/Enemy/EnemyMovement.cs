@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -127,11 +128,23 @@ public class EnemyMovement : MonoBehaviour
                 Vector2Int currentCell = world.WorldToCell(transform.position);
                 Vector2Int nextCell = navigation.GetNextCell(currentCell);
 
+
                 if (nextCell == currentCell)
                 {
-                    rb.linearVelocity = Vector2.zero;
-                    return;
+                    // Try to recover if we're outside the valid navigation field.
+                    Vector2Int? recovery = navigation.GetDistance(currentCell) < 0
+                        ? FindRecoveryCell(currentPosition)
+                        : null;
+
+                    if (!recovery.HasValue)
+                    {
+                        rb.linearVelocity = Vector2.zero;
+                        return;
+                    }
+
+                    nextCell = recovery.Value;
                 }
+
 
                 currentWaypoint = nextCell;
             }
@@ -195,6 +208,42 @@ public class EnemyMovement : MonoBehaviour
         // 7 apply
         rb.linearVelocity = finalDirection * moveSpeed;
 
+    }
+
+    private Vector2Int? FindRecoveryCell(Vector2 position)
+    {
+        Vector2Int origin = world.WorldToCell(position);
+
+        Vector2Int? bestCell = null;
+        float bestDistance = float.MaxValue;
+
+        for(int x = -3; x <= 3; x++)
+        {
+            for (int y = -3; y <= 3; y++)
+            {
+                Vector2Int candidate = origin + new Vector2Int(x, y);
+
+                if (!navigation.IsWalkable(candidate) || navigation.GetDistance(candidate) < 0)
+                    continue;
+
+                Vector2 destination = world.CellToWorld(candidate);
+                Vector2 direction = destination - position;
+
+                float distance = direction.sqrMagnitude;
+
+                if (distance >= bestDistance)
+                    continue;
+
+                //check with col
+                if (distance > 0.001f && rb.Cast(direction.normalized, wallFilter, wallHits, direction.magnitude) > 0)
+                    continue;
+
+                bestCell = candidate;
+                bestDistance = distance;
+
+            }
+        }
+        return bestCell;
     }
 
     private Vector2 CalculateSeperation(Vector2 position, Vector2 desiredDirection)

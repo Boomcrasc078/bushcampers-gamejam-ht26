@@ -292,6 +292,58 @@ Transform:
   - {fileID: 696688827}
   m_Father: {fileID: 624846344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &378491562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 378491563}
+  - component: {fileID: 378491564}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &378491563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378491562}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.4198, y: 51.78255, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &378491564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378491562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc926aef9bcb494894e990378960b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  minSpawnDistance: 6
+  maxSpawnDistance: 15
+  spawnPadding: 0.2
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  spawnCamera: {fileID: 2132013782}
+  offscreenPadding: 0.3
 --- !u!1 &486023432
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,8 +390,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   worldGeneration: {fileID: 624846346}
   playerPrefab: {fileID: 8054339920877794812, guid: 7ab786aed24dd0f4dbdffb4f54aa3bcf, type: 3}
-  enemyPrefab: {fileID: 7473851510182007783, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+  enemySpawner: {fileID: 378491564}
   cameraMovement: {fileID: 2132013785}
+  runManager: {fileID: 1492055802}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  basicEnemy: {fileID: 11400000, guid: be8331757b875e84f950b359f7ac736a, type: 2}
 --- !u!1 &624846343
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +635,56 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &1492055800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492055801}
+  - component: {fileID: 1492055802}
+  m_Layer: 0
+  m_Name: RunManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1492055801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492055800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.4198, y: 51.78255, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1492055802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492055800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8f87408a271c54491049fc127d637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunManager
+  basicEnemy: {fileID: 11400000, guid: be8331757b875e84f950b359f7ac736a, type: 2}
+  spawnInterval: 30
+  startingSpawnCount: 3
+  maxAliveEnemies: 100
+  difficultyIncreaseInterval: 30
+  extraEnemiesPerIncrease: 1
 --- !u!1 &2132013780
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,10 +741,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.00071123755
+    y: 0.0012642225
+    width: 0.99857754
+    height: 0.99620736
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -761,4 +868,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 2132013783}
   - {fileID: 486023433}
+  - {fileID: 1492055801}
+  - {fileID: 378491563}
   - {fileID: 624846344}

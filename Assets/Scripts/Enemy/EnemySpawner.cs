@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour
     private GridNavigation navigation;
 
     public void Initialize(
-        GameObject enemyPrefab,
         Transform player,
         WorldGeneration world,
         GridNavigation navigation)

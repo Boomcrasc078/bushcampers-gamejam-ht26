@@ -6,11 +6,10 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private WorldGeneration worldGeneration;
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private CameraMovement cameraMovement;
-
+    [SerializeField] private RunManager runManager;
     [SerializeField] private LayerMask wallLayer;
-
     [SerializeField] private EnemyDefinition basicEnemy;
 
     private Transform playerTransform;
@@ -18,20 +17,39 @@ public class GameManager : MonoBehaviour
     private Vector2Int lastPlayerCell;
 
 
+
     private void Start()
     {
+        //gen world
         worldGeneration.GenerateWorld();
 
         if (worldGeneration.CurrentWorld == null)
         {
-            Debug.LogError("World generation failed!");
+            Debug.LogError("world gen failed");
             return;
         }
 
         SpawnPlayer();
+
         InitializeNavigation();
-        SpawnTestEnemy();
+
+        if (navigation == null)
+        {
+            Debug.LogError("nav init failed");
+            return;
+        }
+
+        // start enemy spawn
+        enemySpawner.Initialize(
+            playerTransform,
+            worldGeneration,
+            navigation
+        );
+
+        // start game loop
+        runManager.Initialize(enemySpawner);
     }
+
 
     private void Update()
     {
@@ -46,6 +64,10 @@ public class GameManager : MonoBehaviour
             return;
 
         lastPlayerCell = currentCell;
+
+        Debug.Log($"Player cell: {currentCell}, " +
+          $"Walkable for enemy: {navigation.IsWalkable(currentCell)}");
+
         navigation.BuildDistanceField(currentCell);
     }
 
@@ -58,29 +80,7 @@ public class GameManager : MonoBehaviour
         cameraMovement.SetTarget(playerTransform);
     }
 
-    private void SpawnTestEnemy()
-    {
-        if (worldGeneration.RewardSpawnCells.Count == 0)
-        {
-            Debug.LogWarning("No avaliable test spwan locations");
-            return;
-        }
-
-        Vector2Int spawnCell = worldGeneration.RewardSpawnCells[0];
-
-        Vector3 spawnPosition = worldGeneration.CellToWorld(spawnCell);
-
-        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
-        EnemyMovement movement = enemy.GetComponent<EnemyMovement>();
-
-        if(movement != null)
-        {
-            movement.Initialize(playerTransform, worldGeneration, navigation);
-        }
-
-    }
-
+   
     private void InitializeNavigation()
     {
         CircleCollider2D enemyCollider = basicEnemy.prefab.GetComponent<CircleCollider2D>();

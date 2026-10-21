@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5601101712990778187}
   - component: {fileID: 230723559494389025}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RotationTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2561810416744576933}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 1639524389899839362}
   - component: {fileID: 7966640355639335518}
   - component: {fileID: 6010447014938375663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 4703576278613363917}
   - component: {fileID: 1906516889780290986}
   - component: {fileID: 4014544991810656052}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,11 +220,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768a4dd9542034c3887e9f5b9cf4b1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  moveSpeed: 6
+  moveSpeed: 2
   stoppingDistance: 0.7
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemylayer:
+    serializedVersion: 2
+    m_Bits: 128
+  seperationStrength: 0.8
+  seperationPadding: 0.4
 --- !u!114 &3695624102931312124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +321,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2
+  m_Radius: 0.5
 --- !u!1 &9154522702735139457
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1949010563311019366}
   - component: {fileID: 3254797091247995299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
