@@ -8,7 +8,7 @@ public class ShopUpgradeManager : MonoBehaviour
     public static ShopUpgradeManager instance;
     public Upgrade[] Upgrades => upgrades;
     public HashSet<Upgrade> ActivatedUpgrades => activatedUpgrades;
-    private Upgrade[] upgrades;
+    [SerializeField] private Upgrade[] upgrades;
     private HashSet<Upgrade> activatedUpgrades = new HashSet<Upgrade>();
 
     void Awake()
@@ -18,15 +18,6 @@ public class ShopUpgradeManager : MonoBehaviour
             Destroy(this);
         }
         instance = this;
-        AddUpgrades();
-    }
-
-    void AddUpgrades()
-    {
-        upgrades = new Upgrade[]
-        {
-            new SpeedUpgrade(1.2f)
-        };
     }
 
     public void Upgrade(Upgrade upgrade)

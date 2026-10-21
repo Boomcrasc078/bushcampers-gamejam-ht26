@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class SpeedUpgrade : Upgrade
 {
-    float speedMultiplier;
-    public SpeedUpgrade(float speedMultiplier)
-    {
-        this.speedMultiplier = speedMultiplier;
-    }
+    [SerializeField]float speedMultiplier = 1.2f;
 
     public float GetUpgradeMultiplier()
     {

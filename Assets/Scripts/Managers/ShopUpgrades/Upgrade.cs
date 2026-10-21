@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Upgrade
+public class Upgrade : MonoBehaviour
 {
     public int Level => level;
     private int level = 0;

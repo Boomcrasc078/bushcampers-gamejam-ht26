@@ -1,0 +1,2 @@
+public class MapEnlargmentUpgrade : Upgrade {    
+}

@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float baseSpeed = 300f;
     private PlayerInput playerInput;
     private Rigidbody2D rigidbody2D;
+    private SpeedUpgrade speedUpgrade;
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        speedUpgrade = GetComponent<SpeedUpgrade>();
     }
 
     // Update is called once per frame
@@ -24,13 +26,20 @@ public class PlayerMovement : MonoBehaviour
     {
         float speed = baseSpeed;
 
-        var speedUpgrade = (SpeedUpgrade)ShopUpgradeManager.instance.ActivatedUpgrades.FirstOrDefault(upgrade => upgrade is SpeedUpgrade);
-
-        if (speedUpgrade != null)
-        {
-            speed *= speedUpgrade.GetUpgradeMultiplier();
-        }
+        speed *= GetSpeedUpgrade();
 
         rigidbody2D.AddForce(playerInput.GetMoveInput() * Time.deltaTime * speed);
+    }
+
+    float GetSpeedUpgrade()
+    {
+        if (speedUpgrade != null)
+        {
+            if (ShopUpgradeManager.instance.ActivatedUpgrades.Contains(speedUpgrade))
+            {
+                return speedUpgrade.GetUpgradeMultiplier();
+            }
+        }
+        return 0f;
     }
 }
