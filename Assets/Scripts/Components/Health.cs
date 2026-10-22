@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -6,11 +7,12 @@ public class Health : MonoBehaviour
     [SerializeField] private float startingHealth = 10f;
     [SerializeField] private bool usePermanentHealthUpgrade = false;
 
+    [Header("Audio")]
+    [SerializeField] private Sound hurtSound;
+    [SerializeField] private Sound deathSound;
 
     private float healthAmount;
     private bool isDead = false;
-
-
 
     private float GetHealthUpgrade()
     {
@@ -28,16 +30,10 @@ public class Health : MonoBehaviour
             : 0f;
     }
 
-
     void Start()
     {
         healthAmount = startingHealth;
         healthAmount += GetHealthUpgrade();
-
-        if (usePermanentHealthUpgrade)
-        {
-            Debug.Log($"Player starting HP: {healthAmount}");
-        }
     }
 
     public void TakeDamage(float damage)
@@ -47,7 +43,7 @@ public class Health : MonoBehaviour
 
         healthAmount -= damage;
 
-        if (healthAmount <= 0)
+        if (healthAmount <= 0f)
         {
             healthAmount = 0f;
             isDead = true;
@@ -62,8 +58,8 @@ public class Health : MonoBehaviour
         if (onDeath != null)
         {
             onDeath.OnDeath();
-
         }
+
         Destroy(mainGameObject);
     }
 
