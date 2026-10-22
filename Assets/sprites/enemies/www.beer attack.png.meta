@@ -132,12 +132,12 @@ TextureImporter:
       name: www.beer attack_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 8
+        x: 0
+        y: 0
         width: 40
-        height: 27
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -154,12 +154,12 @@ TextureImporter:
       name: www.beer attack_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 8
+        x: 40
+        y: 0
         width: 40
-        height: 28
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: www.beer attack_2
       rect:
         serializedVersion: 2
-        x: 81
-        y: 8
+        x: 80
+        y: 0
         width: 40
-        height: 30
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -198,12 +198,12 @@ TextureImporter:
       name: www.beer attack_3
       rect:
         serializedVersion: 2
-        x: 121
-        y: 8
+        x: 120
+        y: 0
         width: 40
-        height: 31
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -220,12 +220,12 @@ TextureImporter:
       name: www.beer attack_4
       rect:
         serializedVersion: 2
-        x: 161
-        y: 9
+        x: 160
+        y: 0
         width: 40
-        height: 31
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -242,12 +242,12 @@ TextureImporter:
       name: www.beer attack_5
       rect:
         serializedVersion: 2
-        x: 201
-        y: 9
+        x: 200
+        y: 0
         width: 40
-        height: 30
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -264,12 +264,12 @@ TextureImporter:
       name: www.beer attack_6
       rect:
         serializedVersion: 2
-        x: 241
-        y: 9
+        x: 240
+        y: 0
         width: 40
-        height: 29
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -286,12 +286,12 @@ TextureImporter:
       name: www.beer attack_7
       rect:
         serializedVersion: 2
-        x: 281
-        y: 9
+        x: 280
+        y: 0
         width: 40
-        height: 27
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -308,12 +308,12 @@ TextureImporter:
       name: www.beer attack_8
       rect:
         serializedVersion: 2
-        x: 321
-        y: 8
+        x: 320
+        y: 0
         width: 40
-        height: 27
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -330,12 +330,12 @@ TextureImporter:
       name: www.beer attack_9
       rect:
         serializedVersion: 2
-        x: 361
-        y: 8
-        width: 39
-        height: 27
+        x: 360
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -352,7 +352,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 981119fbe7917674c84c1dda7d00c256
     internalID: 0
     vertices: []
     indices: 
@@ -360,7 +360,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":10.0,"y":1.0},"gridSpriteSize":{"x":40.0,"y":40.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       www.beer attack_0: 7321027373202499223
       www.beer attack_1: 1615919924096450924
