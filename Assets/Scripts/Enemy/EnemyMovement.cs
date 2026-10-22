@@ -26,9 +26,11 @@ public class EnemyMovement : MonoBehaviour
 
     private readonly Collider2D[] nearbyEnemies = new Collider2D[32];
     private ContactFilter2D enemyFilter;
-    private float seperationSide;
 
     private CircleCollider2D bodyCollider;
+
+    private EnemyMeleeAttack meleeAttack;
+    private EnemyRangedAttack rangedAttack;
 
 
 
@@ -46,7 +48,9 @@ public class EnemyMovement : MonoBehaviour
         enemyFilter.SetLayerMask(enemylayer);
         enemyFilter.useTriggers = false;
 
-        seperationSide = Random.value < 0.5f ? 1f : -1f;
+        meleeAttack = GetComponent<EnemyMeleeAttack>();
+        rangedAttack = GetComponent<EnemyRangedAttack>();
+
     }
 
     public void Initialize(Transform target,WorldGeneration world,GridNavigation navigation, EnemyDefinition definition)
@@ -69,7 +73,7 @@ public class EnemyMovement : MonoBehaviour
     }
     
 
-
+    // YO THIS SHIT GETTING MESSY FUCKING HELL AHAHHHHHHHHHHH 
     private void FixedUpdate()
     {
         if (target == null || world == null || navigation == null)
@@ -77,6 +81,21 @@ public class EnemyMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             return;
         }
+
+
+        bool stopForMelee =
+            meleeAttack != null && meleeAttack.ShouldStopMoving;
+
+        bool stopForRanged =
+            rangedAttack != null && rangedAttack.ShouldStopMoving;
+
+        if (stopForMelee || stopForRanged)
+        {
+            currentWaypoint = null;
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
 
         Vector2 currentPosition = rb.position;
         Vector2 targetPosition = target.position;
@@ -105,7 +124,7 @@ public class EnemyMovement : MonoBehaviour
             Vector2.Distance(
                 currentPosition,
                 world.CellToWorld(currentWaypoint.Value)
-            ) < 0.1f)
+            ) < 0.3f)
         {
             currentWaypoint = null;
         }
@@ -184,7 +203,12 @@ public class EnemyMovement : MonoBehaviour
         );
 
         //Combine 
-        Vector2 combinedDirection = desiredDirection + seperation;
+
+        Vector2 sidewaysSeparation = seperation -
+            desiredDirection * Vector2.Dot(seperation, desiredDirection);
+
+        Vector2 combinedDirection = desiredDirection + sidewaysSeparation;
+
 
         Vector2 finalDirection =
             combinedDirection.sqrMagnitude > 0.0001f
@@ -283,14 +307,6 @@ public class EnemyMovement : MonoBehaviour
             //push away 
             separation += away.normalized * strength;
 
-
-            //pref movement around other
-            if(Vector2.Dot(desiredDirection, -away.normalized) > 0.7f)
-            {
-                Vector2 sideways = new Vector2(-desiredDirection.y, desiredDirection.x);
-
-                separation += sideways * seperationSide * strength * 0.6f;
-            }
         }
 
         return Vector2.ClampMagnitude(separation, 1f) * seperationStrength;

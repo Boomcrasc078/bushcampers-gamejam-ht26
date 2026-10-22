@@ -34,4 +34,9 @@ public class TrainingDataManager : MonoBehaviour
     {
         return trainingData >= amount;
     }
+
+    public void SetTrainingData(float amount)
+    {
+        trainingData = Mathf.Max(0f, amount);
+    }
 }

@@ -132,6 +132,37 @@ public class EnemySpawner : MonoBehaviour
                 Debug.LogWarning($"Enemy {enemyType.enemyName} has no health component");
             }
 
+            EnemyMeleeAttack meleeattack = enemy.GetComponent<EnemyMeleeAttack>();
+
+            if(meleeattack != null)
+            {
+                meleeattack.Initialize(player, enemyType);
+            }
+
+            EnemyRangedAttack rangedAttack = enemy.GetComponent<EnemyRangedAttack>();
+
+            if (rangedAttack != null)
+            {
+                rangedAttack.Initialize(player, enemyType);
+            }
+
+
+            Shooting shooting = enemy.GetComponent<Shooting>();
+
+            if (shooting != null)
+            {
+                shooting.Initialize(enemyType.damage);
+            }
+
+            TrainingDataDrop drop = enemy.GetComponent<TrainingDataDrop>();
+
+            if (drop != null)
+            {
+                drop.Initialize(enemyType.trainingDataDropAmount);
+            }
+
+
+
             spawnedPositions.Add(spawnPosition2D);
             spawned++;
         }

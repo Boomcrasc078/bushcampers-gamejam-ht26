@@ -1,29 +1,33 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.InputSystem.Composites;
-using UnityEngine.Video;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private GameObject mainGameObject;
     [SerializeField] private float startingHealth = 10f;
-    private float healthAmount;
-    private HealthUpgrade healthUpgrade;
-    [Header("Audio")][SerializeField] private Sound hurtSound;
+    [SerializeField] private bool usePermanentHealthUpgrade = false;
+
+    [Header("Audio")]
+    [SerializeField] private Sound hurtSound;
     [SerializeField] private Sound deathSound;
 
-    void Awake()
-    {
-        healthUpgrade = GetComponent<HealthUpgrade>();
-    }
+    private float healthAmount;
+    private bool isDead = false;
 
-    float GetHealthUpgrade()
+    private float GetHealthUpgrade()
     {
-        if (healthUpgrade != null)
-        {
-            return healthUpgrade.GetHealthIncrease();
-        }
-        return 0f;
+        if (!usePermanentHealthUpgrade)
+            return 0f;
+
+        if (ShopUpgradeManager.instance == null)
+            return 0f;
+
+        HealthUpgrade upgrade =
+            ShopUpgradeManager.instance.GetUpgrade<HealthUpgrade>();
+
+        return upgrade != null
+            ? upgrade.GetHealthIncrease()
+            : 0f;
     }
 
     void Start()
@@ -34,9 +38,15 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isDead)
+            return;
+
         healthAmount -= damage;
-        if (healthAmount <= 0)
+
+        if (healthAmount <= 0f)
         {
+            healthAmount = 0f;
+            isDead = true;
             Die();
         }
     }
@@ -44,16 +54,19 @@ public class Health : MonoBehaviour
     void Die()
     {
         var onDeath = GetComponent<IOnDeath>();
+
         if (onDeath != null)
         {
             onDeath.OnDeath();
-
         }
+
         Destroy(mainGameObject);
     }
 
     public void Initialize(float maxHealth)
     {
-        healthAmount = maxHealth;
+        isDead = false;
+        startingHealth = maxHealth;
+        healthAmount = startingHealth + GetHealthUpgrade();
     }
 }

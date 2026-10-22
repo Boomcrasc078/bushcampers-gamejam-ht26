@@ -10,11 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff989562b7a21064888f2479b7956129, type: 3}
-  m_Name: BasicEnemy
+  m_Name: BasicRanged
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDefinition
-  enemyName: Basic Enemy
-  prefab: {fileID: 7473851510182007783, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
-  maxHealth: 10
-  moveSpeed: 1
+  enemyName: Enemy Ranged
+  prefab: {fileID: 8539630631189862239, guid: 4e958737c763f0e46b923e99b4551707, type: 3}
+  maxHealth: 5
+  moveSpeed: 3
   damage: 1
-  spawnWeight: 1
+  attackRange: 7
+  attackWindup: 0.45
+  attackRecovery: 0.6
+  attackCooldown: 0.3
+  knockbackStrength: 0
+  trainingDataDropAmount: 128
+  spawnWeight: 4

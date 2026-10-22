@@ -25,6 +25,9 @@ public class ShopItemUI : MonoBehaviour
             trainingDataManager.DecreaseTrainingData(GetCost());
             upgradeManager.Upgrade(upgrade);
         }
+
+        //save currency and upgrades
+        SaveManager.SaveCurrentProgression();
     }
 
     public void SetItem(ShopItem shopItem)

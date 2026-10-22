@@ -2,13 +2,22 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    private float damage = 1f;
+
+    public void Initialize(float damage)
+    {
+        this.damage = damage;
+    }
+
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         Health hitHealth = collision.gameObject.GetComponent<Health>();
 
         if (hitHealth != null)
         {
-            hitHealth.TakeDamage(1f);
+            hitHealth.TakeDamage(damage);
         }
 
         Destroy(gameObject);
