@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4014544991810656052}
   - component: {fileID: 6660573794381852219}
   - component: {fileID: 4590567889936264807}
+  - component: {fileID: 7808439527508617227}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -167,6 +168,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6701484596721332199, guid: 30d2de2b251044ebf9957ecc3aaed800, type: 3}
   rotationTransform: {fileID: 5601101712990778187}
   firePositionTransform: {fileID: 2561810416744576933}
+  shootSound: {fileID: 0}
 --- !u!50 &1906516889780290986
 Rigidbody2D:
   serializedVersion: 5
@@ -182,7 +184,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -244,6 +246,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   mainGameObject: {fileID: 7473851510182007783}
   startingHealth: 10
+  usePermanentHealthUpgrade: 0
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!114 &4590567889936264807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +262,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingDataDrop
   trainingDataPickupPrefab: {fileID: 1465018671966647561, guid: cdf28aa2e42b54daf99bcebbbb737367, type: 3}
+--- !u!114 &7808439527508617227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473851510182007783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aec5b69dbfc244468783e62b75b9085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHitReaction
+  knockbackForce: 1
+  knockbackDuration: 0.2
+  spriteRenderer: {fileID: 3254797091247995299}
+  hitColor: {r: 0.40392157, g: 0, b: 1, a: 1}
+  flashDuration: 0.1
 --- !u!1 &9154522702735139457
 GameObject:
   m_ObjectHideFlags: 0

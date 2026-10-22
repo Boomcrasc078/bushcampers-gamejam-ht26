@@ -16,21 +16,23 @@ public class Shooting : MonoBehaviour
     private float bulletDamage = 1f;
     private bool isPlayerWeapon;
 
+    private PiercingUpgrade piercingUpgrade;
+    private KnockbackUpgrade knockbackUpgrade;
+
 
     void Awake()
     {
         shootingInterface = GetComponent<IShooting>();
-        Debug.Log(
-            $"{gameObject.name} uses IShooting from: " +
-            $"{(shootingInterface != null ? shootingInterface.GetType().Name : "NONE")}"
-        );
-        // Only player gets upgrades
+
         isPlayerWeapon = GetComponent<PlayerInput>() != null;
 
         if (isPlayerWeapon && ShopUpgradeManager.instance != null)
         {
-            shootingRateUpgrade =
-                ShopUpgradeManager.instance.GetUpgrade<ShootingRateUpgrade>();
+            shootingRateUpgrade = ShopUpgradeManager.instance.GetUpgrade<ShootingRateUpgrade>();
+
+            piercingUpgrade = ShopUpgradeManager.instance.GetUpgrade<PiercingUpgrade>();
+
+            knockbackUpgrade = ShopUpgradeManager.instance.GetUpgrade<KnockbackUpgrade>();
         }
     }
 
@@ -68,13 +70,6 @@ public class Shooting : MonoBehaviour
     private void Shoot()
     {
 
-        Debug.Log(
-            $"Shooting on {gameObject.name}: " +
-            $"Type={shootingType}, " +
-            $"Bullet={bulletPrefab}, " +
-            $"Rotation={rotationTransform}, " +
-            $"FirePoint={firePositionTransform}"
-        );
         if (AudioManager.instance != null && shootSound != null)
         {
             AudioManager.instance.PlaySound(shootSound, gameObject);
@@ -102,12 +97,17 @@ public class Shooting : MonoBehaviour
             }
 
 
+
             Bullet bulletComponent = bullet.GetComponent<Bullet>();
 
-            if(bulletComponent != null)
+            if (bulletComponent != null)
             {
-                bulletComponent.Initialize(bulletDamage);
+                int additionalPierces = piercingUpgrade != null ? piercingUpgrade.GetAdditionalPierces() : 0;
+                float knockbackMultiplier = knockbackUpgrade != null ? knockbackUpgrade.GetKnockbackMultiplier() : 1f;
+
+                bulletComponent.Initialize(bulletDamage, additionalPierces, knockbackMultiplier);
             }
+
 
             var bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
 

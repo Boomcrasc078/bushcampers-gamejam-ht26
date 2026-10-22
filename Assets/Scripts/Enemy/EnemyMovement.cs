@@ -13,7 +13,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float seperationStrength = 0.8f;
     [SerializeField] private float seperationPadding = 0.4f;
 
-    
+    [Header("Knockback")]
+    private float knockbackEndTime;
+
+
 
     private Rigidbody2D rb;
     private Transform target;
@@ -76,6 +79,9 @@ public class EnemyMovement : MonoBehaviour
     // YO THIS SHIT GETTING MESSY FUCKING HELL AHAHHHHHHHHHHH 
     private void FixedUpdate()
     {
+        if (Time.time < knockbackEndTime)
+            return;
+
         if (target == null || world == null || navigation == null)
         {
             rb.linearVelocity = Vector2.zero;
@@ -310,6 +316,11 @@ public class EnemyMovement : MonoBehaviour
         }
 
         return Vector2.ClampMagnitude(separation, 1f) * seperationStrength;
+    }
+
+    public void PauseForKnockback(float duration)
+    {
+        knockbackEndTime = Mathf.Max(knockbackEndTime, Time.time + duration);
     }
 
 }
