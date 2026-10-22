@@ -17,4 +17,4 @@ MonoBehaviour:
   itemCostMultiplier: 1.3
   upgradeIndex: 7
   purchaseText: Upgrade
-  upgradeText: Install
+  upgradeText: Upgrade

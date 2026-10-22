@@ -13,13 +13,22 @@ public class Health : MonoBehaviour
     [SerializeField] private Sound deathSound;
 
     private float healthAmount;
+    private bool isDead = false;
+    private bool isInvulnerable = false;
+    private Coroutine invulnerabilityCoroutine;
 
     public float CurrentHealth => healthAmount;
     public float MaxHealth => startingHealth + GetHealthUpgrade();
-    private bool isDead = false;
 
-    private bool isInvulnerable = false;
-    private Coroutine invulnerabilityCoroutine;
+    public bool Heal(float amount)
+    {
+        if (isDead || amount <= 0f || healthAmount >= MaxHealth)
+            return false;
+
+        healthAmount = Mathf.Min(healthAmount + amount, MaxHealth);
+        return true;
+    }
+
 
     private float GetHealthUpgrade()
     {

@@ -2084,6 +2084,7 @@ MonoBehaviour:
   - {fileID: 1031550848}
   - {fileID: 1020869020}
   - {fileID: 958378965}
+  - {fileID: 1858117402}
 --- !u!1 &624846343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,6 +2217,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e428bee08954248a5b61e289b6f52027, type: 2}
   - {fileID: 11400000, guid: 412e8d48f20f99b4ea1e1b0180947e80, type: 2}
   - {fileID: 11400000, guid: 38bc4e9a2ab8374419869f1a4ccf1604, type: 2}
+  - {fileID: 11400000, guid: ff7e36c009bf9ef4e8b8eca4191e01c2, type: 2}
   shopItemPrefab: {fileID: 4342271545775392125, guid: 94e2a7664ab8042e0b6d70c3fb35f91f, type: 3}
 --- !u!114 &627611153
 MonoBehaviour:
@@ -2232,7 +2234,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 140
+    m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
   m_StartCorner: 0
@@ -3088,6 +3090,7 @@ Transform:
   - {fileID: 1031550847}
   - {fileID: 1020869019}
   - {fileID: 958378966}
+  - {fileID: 1858117403}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882071453
@@ -4960,6 +4963,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799913758}
   m_CullTransparentMesh: 1
+--- !u!1 &1858117401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1858117403}
+  - component: {fileID: 1858117402}
+  m_Layer: 0
+  m_Name: PickupRadiusUpgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1858117402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858117401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9544c0d22d2035342bcc126f8fb92224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupRadiusUpgrade
+  radiusIncreasePerLevel: 0.2
+--- !u!4 &1858117403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858117401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 797034565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861073727
 GameObject:
   m_ObjectHideFlags: 0
@@ -5999,14 +6047,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.0011820331
+    width: 0.99999994
+    height: 0.99763596
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.8333335
+  orthographic size: 8.791667
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

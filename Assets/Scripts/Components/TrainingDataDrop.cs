@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class TrainingDataDrop : MonoBehaviour, IOnDeath
 {
-
     [SerializeField] private GameObject trainingDataPickupPrefab;
+
+    [Header("Special Drops")]
+    [SerializeField] private GameObject healthPickupPrefab;
+    [SerializeField, Range(0f, 1f)] private float healthDropChance = 0.06f;
+
+    [SerializeField] private GameObject overloadPulsePickupPrefab;
+    [SerializeField, Range(0f, 1f)] private float overloadPulseDropChance = 0.01f;
 
     private float trainingDataDropAmount;
 
@@ -26,6 +32,8 @@ public class TrainingDataDrop : MonoBehaviour, IOnDeath
             runManager.RegisterEnemyKill();
         }
         DropTrainingData();
+        TrySpawnPickup(healthPickupPrefab, healthDropChance);
+        TrySpawnPickup(overloadPulsePickupPrefab, overloadPulseDropChance);
     }
 
     public void DropTrainingData()
@@ -35,4 +43,13 @@ public class TrainingDataDrop : MonoBehaviour, IOnDeath
 
         trainingDataPickup.SetTrainingDataAmount(trainingDataDropAmount);
     }
+
+    private void TrySpawnPickup(GameObject prefab, float dropChance)
+    {
+        if (prefab == null || Random.value >= dropChance)
+            return;
+
+        Instantiate(prefab, transform.position, Quaternion.identity);
+    }
+
 }

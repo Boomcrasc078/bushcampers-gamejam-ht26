@@ -262,6 +262,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingDataDrop
   trainingDataPickupPrefab: {fileID: 1465018671966647561, guid: cdf28aa2e42b54daf99bcebbbb737367, type: 3}
+  healthPickupPrefab: {fileID: 3585745183590748557, guid: e299cde4f2c68ed49b9a8e641d75dec8, type: 3}
+  healthDropChance: 0.06
+  overloadPulsePickupPrefab: {fileID: 3585745183590748557, guid: 69bde91727b9a8e4faf34285a73fbc55, type: 3}
+  overloadPulseDropChance: 0.01
 --- !u!114 &7808439527508617227
 MonoBehaviour:
   m_ObjectHideFlags: 0
