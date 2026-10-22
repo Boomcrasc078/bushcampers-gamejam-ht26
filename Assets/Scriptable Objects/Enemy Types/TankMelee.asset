@@ -15,11 +15,12 @@ MonoBehaviour:
   enemyName: Enemy Tank
   prefab: {fileID: 8664039848701334188, guid: 9fc70a851f440ce4784628daa740a8d6, type: 3}
   maxHealth: 30
-  moveSpeed: 1
+  moveSpeed: 2
   damage: 6
   attackRange: 2.5
   attackWindup: 1
   attackRecovery: 1.2
   attackCooldown: 0.6
   knockbackStrength: 9
+  trainingDataDropAmount: 512
   spawnWeight: 2

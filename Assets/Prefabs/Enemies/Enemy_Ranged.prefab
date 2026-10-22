@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.003693494
       objectReference: {fileID: 0}
+    - target: {fileID: 2426656838767211835, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6656334347881456502, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
       propertyPath: m_Name
       value: Enemy_Ranged

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Upgrade Damage Optimization
+  m_Name: Instruction Pipeline
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: Improved attack algorithms increase projectile damage by 15% per upgrade level.
-  itemBaseCost: 180
-  itemCostMultiplier: 1.2
-  upgradeIndex: 10
+  itemDescription: Optimized instruction pipelines allow projectile routines to execute through 1 additional enemy per level before terminating.
+  itemBaseCost: 8192
+  itemCostMultiplier: 2.35
+  upgradeIndex: 6
   purchaseText: Upgrade
   upgradeText: Upgrade

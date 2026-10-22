@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Upgrade Penetration Algorithm
+  m_Name: CPU Clock Generator
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: Improved projectile processing allows shots to penetrate additional targets, hitting one extra enemy per upgrade level.
-  itemBaseCost: 160
-  itemCostMultiplier: 1.4
-  upgradeIndex: 6
-  purchaseText: Upgrade
+  itemDescription: Overclocked processing cycles execute firing instructions 10% faster per level, with each overclock compounding.
+  itemBaseCost: 4096
+  itemCostMultiplier: 1.95
+  upgradeIndex: 2
+  purchaseText: Install
   upgradeText: Upgrade

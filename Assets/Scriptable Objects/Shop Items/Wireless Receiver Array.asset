@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Central Processing Unit Core Increase
+  m_Name: Wireless Receiver Array
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: Increase the Central Processing Unit Core count to handle multiple learning processes at once.
-  itemBaseCost: 146
-  itemCostMultiplier: 1.4
-  upgradeIndex: 3
-  purchaseText: Increase
-  upgradeText: Increase
+  itemDescription: More sensitive receiver antennas detect and attract nearby data and support pickups from 20% farther away per level.
+  itemBaseCost: 1024
+  itemCostMultiplier: 1.6
+  upgradeIndex: 8
+  purchaseText: Upgrade
+  upgradeText: Upgrade

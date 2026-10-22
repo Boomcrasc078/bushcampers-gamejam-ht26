@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Ultra Performance Graphical Processing Unit
+  m_Name: Arithmetic Logic Unit
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: Enables the Graphical Processing Unit to use it's maximum capacity during the learning process.
-  itemBaseCost: 122
-  itemCostMultiplier: 1.7
-  upgradeIndex: 2
-  purchaseText: Install
+  itemDescription: Additional arithmetic logic units enhance attack calculations, increasing projectile damage by 15% per level.
+  itemBaseCost: 4096
+  itemCostMultiplier: 1.9
+  upgradeIndex: 10
+  purchaseText: Upgrade
   upgradeText: Upgrade

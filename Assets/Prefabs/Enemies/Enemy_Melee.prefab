@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1906516889780290986, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
+      propertyPath: m_Mass
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906516889780290986, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 270269da284c8e94c90f774b6be57e19, type: 2}
@@ -80,61 +84,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7473851510182007783, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8877521125042200365}
-    - targetCorrespondingSourceObject: {fileID: 4297882259665328150, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2039882035411106383}
   m_SourcePrefab: {fileID: 100100000, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
---- !u!1 &35287382484904071 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4297882259665328150, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}
-  m_PrefabInstance: {fileID: 4312329182271959185}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &2039882035411106383
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35287382484904071}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!212 &1653705339298728242 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3254797091247995299, guid: c56d5c8e2b9f94554b5948ca061f698c, type: 3}

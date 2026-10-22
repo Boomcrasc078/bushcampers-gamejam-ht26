@@ -33,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
         float speed = moveSpeed * GetSpeedUpgrade();
 
-        rigidbody2D.linearVelocity = direction * speed;
+        rigidbody2D.linearVelocity = direction * speed + knockbackVelocity;
+        knockbackVelocity = Vector2.MoveTowards(knockbackVelocity, Vector2.zero, knockbackRecovery * Time.fixedDeltaTime);
     }
 
 
@@ -49,10 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void ApplyKnockback(Vector2 velocity)
     {
-        knockbackVelocity = Vector2.ClampMagnitude(
-            knockbackVelocity + velocity,
-            12f
-        );
+        Debug.Log($"Player received knockback: {velocity}");
+        knockbackVelocity = Vector2.ClampMagnitude(knockbackVelocity + velocity, 12f);
     }
 
 }

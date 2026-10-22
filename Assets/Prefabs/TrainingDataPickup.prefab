@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 885943311568352048}
   - component: {fileID: 5411417617780951408}
+  - component: {fileID: 7583185311871073318}
   m_Layer: 0
   m_Name: TrainingDataPickup
   m_TagString: Untagged
@@ -45,9 +46,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c1de8d738e4496292f49f3ce064bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingDataPickup
-  pullDistance: 3
-  pullSpeed: 3
   pickupDistance: 1
+  lifetime: 30
+--- !u!114 &7583185311871073318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465018671966647561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c338277477313364d83756244f426e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupMagnet
+  pullDistance: 3
+  pullSpeed: 6
 --- !u!1 &6305601693817693479
 GameObject:
   m_ObjectHideFlags: 0

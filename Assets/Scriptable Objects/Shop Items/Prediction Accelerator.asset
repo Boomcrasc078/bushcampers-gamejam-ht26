@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Processing Speed Acceleration Unit
+  m_Name: Prediction Accelerator
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: 'An extra processor for the graphical processing unit programmed to accelerate the speed to access new training sources. '
-  itemBaseCost: 30
-  itemCostMultiplier: 1.2
-  upgradeIndex: 0
-  purchaseText: Install
+  itemDescription: Dedicated prediction hardware identifies valuable simulation sectors, increasing optional room reward chance by 5 percentage points per level.
+  itemBaseCost: 4096
+  itemCostMultiplier: 1.9
+  upgradeIndex: 5
+  purchaseText: Upgrade
   upgradeText: Upgrade

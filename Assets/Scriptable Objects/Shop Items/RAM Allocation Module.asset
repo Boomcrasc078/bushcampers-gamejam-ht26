@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Upgrade Data Retrieval Range
+  m_Name: RAM Allocation Module
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: Optimized data retrieval algorithms increase the attraction radius of nearby Training Data and power-ups by 20% per level.
-  itemBaseCost: 120
-  itemCostMultiplier: 1.35
-  upgradeIndex: 8
-  purchaseText: Upgrade
-  upgradeText: Upgrade
+  itemDescription: Larger memory blocks allow the simulation to allocate more space to individual rooms, increasing room size by 8% per level.
+  itemBaseCost: 2048
+  itemCostMultiplier: 1.65
+  upgradeIndex: 3
+  purchaseText: Increase
+  upgradeText: Increase

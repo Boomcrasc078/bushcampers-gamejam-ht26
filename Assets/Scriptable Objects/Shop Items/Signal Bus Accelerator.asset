@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Upgrade Projectile Acceleration
+  m_Name: Signal Bus Accelerator
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: Optimized launch calculations increase projectile travel speed by 15% per upgrade level.
-  itemBaseCost: 90
-  itemCostMultiplier: 1.25
+  itemDescription: High-bandwidth signal buses reduce projectile instruction latency, increasing projectile travel speed by 15% per level.
+  itemBaseCost: 1536
+  itemCostMultiplier: 1.7
   upgradeIndex: 9
-  purchaseText: Upgrade
+  purchaseText: Install
   upgradeText: Upgrade

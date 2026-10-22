@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce304c3e1d35d4fe19ba6e33040e3076, type: 3}
-  m_Name: Top Tier Durability Titanium Case
+  m_Name: Multi-Core Processor
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemDescription: Purchase of top tier titanium cases for the safety of computers processing sources used for training data.
-  itemBaseCost: 48
-  itemCostMultiplier: 1.8
-  upgradeIndex: 4
-  purchaseText: Purchase
-  upgradeText: Purchase
+  itemDescription: Additional CPU cores execute attack routines in parallel, firing 1 extra projectile per shot per level. Wider spread reduces long-range accuracy.
+  itemBaseCost: 12288
+  itemCostMultiplier: 2.5
+  upgradeIndex: 11
+  purchaseText: Install
+  upgradeText: Upgrade

@@ -157,4 +157,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupMagnet
   pullDistance: 3
-  pullSpeed: 2
+  pullSpeed: 3

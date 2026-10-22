@@ -4232,9 +4232,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RunManager
   enemyTypes:
   - enemy: {fileID: 11400000, guid: be8331757b875e84f950b359f7ac736a, type: 2}
-    unlockTime: 60
-  - enemy: {fileID: 11400000, guid: f26b8b03c81751c40ab06c2cd171a005, type: 2}
     unlockTime: 0
+  - enemy: {fileID: 11400000, guid: f26b8b03c81751c40ab06c2cd171a005, type: 2}
+    unlockTime: 60
   - enemy: {fileID: 11400000, guid: 16b66848abe3bfe46a54431d58b6e803, type: 2}
     unlockTime: 120
   spawnInterval: 5
@@ -6233,14 +6233,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0011820331
-    width: 0.99999994
-    height: 0.99763596
+    y: 0
+    width: 0.9992903
+    height: 0.99873894
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.791667
+  orthographic size: 8.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
