@@ -6,8 +6,10 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private GameObject mainGameObject;
     [SerializeField] private float startingHealth = 10f;
+
     private float healthAmount;
     private HealthUpgrade healthUpgrade;
+    private bool isDead = false;
 
     void Awake()
     {
@@ -31,9 +33,15 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isDead)
+            return;
+
         healthAmount -= damage;
+
         if (healthAmount <= 0)
         {
+            healthAmount = 0f;
+            isDead = true;
             Die();
         }
     }
@@ -41,6 +49,7 @@ public class Health : MonoBehaviour
     void Die()
     {
         var onDeath = GetComponent<IOnDeath>();
+
         if (onDeath != null)
         {
             onDeath.OnDeath();
@@ -51,6 +60,7 @@ public class Health : MonoBehaviour
 
     public void Initialize(float maxHealth)
     {
+        isDead = false;
         startingHealth = maxHealth;
         healthAmount = startingHealth + GetHealthUpgrade();
     }

@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 7703945237733956529}
   - component: {fileID: 5490514114590905330}
   - component: {fileID: 8030711111142634297}
+  - component: {fileID: 2743211009102715248}
   - component: {fileID: 3893533458180174716}
   m_Layer: 0
   m_Name: Player
@@ -277,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
+  knockbackRecovery: 25
 --- !u!114 &3810900194020735609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d6b19a2185f4e47bed5e5c2d499797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
-  shootingType: {fileID: 0}
+  shootingType: {fileID: 11400000, guid: 8bb5890565d874b75a660f4ce9dfed82, type: 2}
   bulletPrefab: {fileID: 6701484596721332199, guid: 30d2de2b251044ebf9957ecc3aaed800, type: 3}
   rotationTransform: {fileID: 4853258435064591932}
   firePositionTransform: {fileID: 1979923199369331407}
@@ -331,6 +333,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   mainGameObject: {fileID: 8054339920877794812}
   startingHealth: 10
+--- !u!114 &2743211009102715248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8054339920877794812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0da9be59a027fe4286ff8959f6f5e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeathHandler
 --- !u!58 &3893533458180174716
 CircleCollider2D:
   m_ObjectHideFlags: 0

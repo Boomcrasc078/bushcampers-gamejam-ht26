@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private Transform playerTransform;
     private GridNavigation navigation;
     private Vector2Int lastPlayerCell;
+    private bool runEnded = false;
 
 
 
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (playerTransform == null || navigation == null)
+        if (runEnded || playerTransform == null || navigation == null)
             return;
 
         Vector2Int currentCell = worldGeneration.WorldToCell(
@@ -78,6 +79,17 @@ public class GameManager : MonoBehaviour
 
         playerTransform = player.transform;
         cameraMovement.SetTarget(playerTransform);
+
+        PlayerDeathHandler deathHandler = player.GetComponentInChildren<PlayerDeathHandler>();
+
+        if(deathHandler != null)
+        {
+            deathHandler.Initialize(this);
+        }
+        else
+        {
+            Debug.LogError("player prefab is missing on handler");
+        }
     }
 
    
@@ -102,5 +114,25 @@ public class GameManager : MonoBehaviour
         lastPlayerCell = playerCell;
 
         navigation.BuildDistanceField(playerCell);
+    }
+
+    public void EndRun()
+    {
+        if (runEnded)
+            return;
+
+        runEnded = true;
+
+        //stop waves
+        runManager.enabled = false;
+
+        //save currency
+        SaveManager.SaveCurrentProgression();
+
+        //freeze game
+        Time.timeScale = 0f;
+
+        Debug.Log("RUN ENDED : progress saved");
+
     }
 }

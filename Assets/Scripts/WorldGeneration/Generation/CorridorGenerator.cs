@@ -137,7 +137,7 @@ public class CorridorGenerator
             ConnectionCounts[i] = connections;
             if(connections == 1)
             {
-                Debug.Log($"Dead-end-candidate: Room {i}");
+                //Debug.Log($"Dead-end-candidate: Room {i}");
             }
         }
        
