@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //load current upgrades etc
+        SaveManager.LoadCurrentProgression();
+
         //gen world
         worldGeneration.GenerateWorld();
 

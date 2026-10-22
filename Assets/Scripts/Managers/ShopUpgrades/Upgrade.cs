@@ -15,4 +15,9 @@ public class Upgrade : MonoBehaviour
         level += amount;
     }
 
+    public void SetLevel(int newLevel)
+    {
+        level = Mathf.Max(0, newLevel);
+    }
+
 }
