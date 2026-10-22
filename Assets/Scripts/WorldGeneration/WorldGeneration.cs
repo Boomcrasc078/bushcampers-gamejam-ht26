@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldGeneration : MonoBehaviour
@@ -26,6 +27,7 @@ public class WorldGeneration : MonoBehaviour
     [Header("Reward Settings")]
     [Range(0f, 1f)]
     [SerializeField] private float normalRoomRewardChance = 0.15f;
+    [SerializeField] private GameObject overloadPulsePickupPrefab;
 
     public WorldGrid CurrentWorld { get; private set; }
     public Vector2Int SpawnCell { get; private set; }
@@ -36,6 +38,8 @@ public class WorldGeneration : MonoBehaviour
     private MapEnlargmentUpgrade mapEnlargmentUpgrade;
     private RoomSizeUpgrade roomSizeUpgrade;
     private PowerupChanceUpgrade powerupChanceUpgrade;
+
+    
 
 
 
@@ -213,6 +217,27 @@ public class WorldGeneration : MonoBehaviour
         CurrentWorld = world;
         SpawnCell = spawnCell;
         SpawnWorldPosition = worldRenderer.GetCellCenterWorld(spawnCell);
+
+
+        // 7. Spawn rewards in rooms
+        if (overloadPulsePickupPrefab != null)
+        {
+            foreach (Vector2Int rewardCell in RewardSpawnCells)
+            {
+                Vector3 position = CellToWorld(rewardCell);
+
+                Instantiate(
+                    overloadPulsePickupPrefab,
+                    position,
+                    Quaternion.identity
+                );
+            }
+        }
+        else
+        {
+            Debug.LogWarning("missing prefab");
+        }
+
 
 
     }

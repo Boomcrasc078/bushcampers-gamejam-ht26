@@ -1,4 +1,4 @@
-
+using System.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -7,12 +7,19 @@ public class Health : MonoBehaviour
     [SerializeField] private float startingHealth = 10f;
     [SerializeField] private bool usePermanentHealthUpgrade = false;
 
+
     [Header("Audio")]
     [SerializeField] private Sound hurtSound;
     [SerializeField] private Sound deathSound;
 
     private float healthAmount;
+
+    public float CurrentHealth => healthAmount;
+    public float MaxHealth => startingHealth + GetHealthUpgrade();
     private bool isDead = false;
+
+    private bool isInvulnerable = false;
+    private Coroutine invulnerabilityCoroutine;
 
     private float GetHealthUpgrade()
     {
@@ -38,7 +45,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (isDead)
+        if (isDead || isInvulnerable)
             return;
 
         healthAmount -= damage;
@@ -69,4 +76,29 @@ public class Health : MonoBehaviour
         startingHealth = maxHealth;
         healthAmount = startingHealth + GetHealthUpgrade();
     }
+
+
+    public void GrantInvulnerability(float duration)
+    {
+        if (isDead)
+            return;
+
+        if (invulnerabilityCoroutine != null)
+            StopCoroutine(invulnerabilityCoroutine);
+
+        invulnerabilityCoroutine =
+            StartCoroutine(InvulnerabilityRoutine(duration));
+    }
+
+    private IEnumerator InvulnerabilityRoutine(float duration)
+    {
+        isInvulnerable = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isInvulnerable = false;
+        invulnerabilityCoroutine = null;
+    }
+
+
 }
