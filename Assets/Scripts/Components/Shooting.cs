@@ -20,7 +20,10 @@ public class Shooting : MonoBehaviour
     void Awake()
     {
         shootingInterface = GetComponent<IShooting>();
-
+        Debug.Log(
+            $"{gameObject.name} uses IShooting from: " +
+            $"{(shootingInterface != null ? shootingInterface.GetType().Name : "NONE")}"
+        );
         // Only player gets upgrades
         isPlayerWeapon = GetComponent<PlayerInput>() != null;
 
@@ -64,7 +67,18 @@ public class Shooting : MonoBehaviour
 
     private void Shoot()
     {
-        AudioManager.instance.PlaySound(shootSound, gameObject);
+
+        Debug.Log(
+            $"Shooting on {gameObject.name}: " +
+            $"Type={shootingType}, " +
+            $"Bullet={bulletPrefab}, " +
+            $"Rotation={rotationTransform}, " +
+            $"FirePoint={firePositionTransform}"
+        );
+        if (AudioManager.instance != null && shootSound != null)
+        {
+            AudioManager.instance.PlaySound(shootSound, gameObject);
+        }
         var bullets = shootingType.bulletsPerShot;
         for (int i = 0; i < bullets; i++)
         {

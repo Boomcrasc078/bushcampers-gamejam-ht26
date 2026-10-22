@@ -72,12 +72,46 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8835514084446895196, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 3021988470815120815, guid: 47c6d129b6b15de43baf8793b737f1a2, type: 3}
     - target: {fileID: 8877521125042200365, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 617281228265577837, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6656334347881456502, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1012625838253759155}
   m_SourcePrefab: {fileID: 100100000, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
+--- !u!4 &6665807784175613939 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8530773024460981210, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
+  m_PrefabInstance: {fileID: 3090261005543502889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8539630631189862239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6656334347881456502, guid: 89f64ec3eda4dc545a84d8ad0163451d, type: 3}
+  m_PrefabInstance: {fileID: 3090261005543502889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1012625838253759155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539630631189862239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fef206dbc26685418f1311af3e51246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedAttack
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  aimPivot: {fileID: 6665807784175613939}

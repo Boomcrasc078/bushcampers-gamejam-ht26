@@ -292,9 +292,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
   shootingType: {fileID: 11400000, guid: 8bb5890565d874b75a660f4ce9dfed82, type: 2}
-  bulletPrefab: {fileID: 6701484596721332199, guid: 30d2de2b251044ebf9957ecc3aaed800, type: 3}
+  bulletPrefab: {fileID: 6126773112791398878, guid: 445dad653d369d440ba35a3dff84ec81, type: 3}
   rotationTransform: {fileID: 4853258435064591932}
   firePositionTransform: {fileID: 1979923199369331407}
+  shootSound: {fileID: 0}
 --- !u!114 &7703945237733956529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +335,8 @@ MonoBehaviour:
   mainGameObject: {fileID: 8054339920877794812}
   startingHealth: 10
   usePermanentHealthUpgrade: 1
+  hurtSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!114 &2743211009102715248
 MonoBehaviour:
   m_ObjectHideFlags: 0
