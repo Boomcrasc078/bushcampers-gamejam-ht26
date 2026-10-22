@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(IShooting))]
 public class Shooting : MonoBehaviour
@@ -19,6 +18,8 @@ public class Shooting : MonoBehaviour
     private PiercingUpgrade piercingUpgrade;
     private KnockbackUpgrade knockbackUpgrade;
     private ProjectileVelocityUpgrade projectileVelocityUpgrade;
+    private ProjectileDamageUpgrade projectileDamageUpgrade;
+    private MultishotUpgrade multishotUpgrade;
 
 
     void Awake()
@@ -36,6 +37,10 @@ public class Shooting : MonoBehaviour
             knockbackUpgrade = ShopUpgradeManager.instance.GetUpgrade<KnockbackUpgrade>();
 
             projectileVelocityUpgrade = ShopUpgradeManager.instance.GetUpgrade<ProjectileVelocityUpgrade>();
+
+            projectileDamageUpgrade = ShopUpgradeManager.instance.GetUpgrade<ProjectileDamageUpgrade>();
+
+            multishotUpgrade = ShopUpgradeManager.instance.GetUpgrade<MultishotUpgrade>();
         }
     }
 
@@ -77,13 +82,19 @@ public class Shooting : MonoBehaviour
         {
             AudioManager.instance.PlaySound(shootSound, gameObject);
         }
-        var bullets = shootingType.bulletsPerShot;
+        int extraBullets = multishotUpgrade != null ? multishotUpgrade.GetAdditionalProjectiles() : 0;
+        int bullets = Mathf.Max(1, shootingType.bulletsPerShot + extraBullets);
+
         for (int i = 0; i < bullets; i++)
         {
-            var spread = shootingType.bulletSpreadDegrees;
-            var spreadAngle = Random.Range(-spread / 2f, spread / 2f);
-            var bulletRotation = rotationTransform.rotation * Quaternion.Euler(0f, 0f, spreadAngle);
-            var bullet = GameObject.Instantiate(bulletPrefab, firePositionTransform.position, bulletRotation);
+            float centeredIndex = i - (bullets - 1) / 2f;
+            float multishotAngle = isPlayerWeapon ? centeredIndex * shootingType.multishotAngleStep : 0f;
+
+            float spread = shootingType.bulletSpreadDegrees;
+            float randomSpread = Random.Range(-spread / 2f, spread / 2f);
+
+            Quaternion bulletRotation = rotationTransform.rotation * Quaternion.Euler(0f, 0f, multishotAngle + randomSpread);
+            GameObject bullet = Instantiate(bulletPrefab, firePositionTransform.position, bulletRotation);
 
 
             string bulletLayerName = isPlayerWeapon ? "PlayerBullet" : "EnemyBullet";
@@ -99,8 +110,6 @@ public class Shooting : MonoBehaviour
                 Debug.LogError($"Missing layer: {bulletLayerName}");
             }
 
-
-
             Bullet bulletComponent = bullet.GetComponent<Bullet>();
 
             if (bulletComponent != null)
@@ -108,24 +117,16 @@ public class Shooting : MonoBehaviour
                 int additionalPierces = piercingUpgrade != null ? piercingUpgrade.GetAdditionalPierces() : 0;
                 float knockbackMultiplier = knockbackUpgrade != null ? knockbackUpgrade.GetKnockbackMultiplier() : 1f;
 
-                bulletComponent.Initialize(bulletDamage, additionalPierces, knockbackMultiplier);
+                float damageMultiplier = projectileDamageUpgrade != null ? projectileDamageUpgrade.GetDamageMultiplier() : 1f;
+                bulletComponent.Initialize(bulletDamage * damageMultiplier, additionalPierces, knockbackMultiplier);
             }
-
 
             var bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
 
-
-
             float speedMultiplier = projectileVelocityUpgrade != null ? projectileVelocityUpgrade.GetSpeedMultiplier() : 1f;
+            float projectileSpeed = shootingType.bulletSpeed * speedMultiplier;
 
-            if (isPlayerWeapon)
-            {
-                Debug.Log($"Projectile Velocity | Level: {projectileVelocityUpgrade?.Level ?? 0} | Multiplier: {speedMultiplier:F2}x | Base Force: {shootingType.bulletSpeed} | Final Force: {shootingType.bulletSpeed * speedMultiplier:F2}");
-            }
-
-            bulletRigidbody.AddRelativeForce(Vector2.up * shootingType.bulletSpeed * speedMultiplier);
-
-
+            bulletRigidbody.linearVelocity = (Vector2)bullet.transform.up * projectileSpeed;
         }
     }
 

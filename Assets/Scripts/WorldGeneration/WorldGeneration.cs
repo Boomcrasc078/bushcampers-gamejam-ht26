@@ -141,19 +141,6 @@ public class WorldGeneration : MonoBehaviour
             seed
         );
 
-        Debug.Log(
-            $"Map: {width}x{height}, " +
-            $"Rooms: {rooms.Count}/{roomCount}, " +
-            $"Room sizes: {upgradedMinRoomSize}-{upgradedMaxRoomSize}"
-        );
-
-        Debug.Log(
-            $"Generated map: {width}x{height}, " +
-            $"Requested rooms: {roomCount}, " +
-            $"Actual rooms: {rooms.Count}"
-        );
-
-
         if (rooms.Count == 0)
         {
             Debug.LogError("No rooms generated! Cannot place player.");
@@ -180,11 +167,6 @@ public class WorldGeneration : MonoBehaviour
         RectInt spawnRoom = rooms[spawnRoomIndex];
 
         Vector2Int spawnCell = new Vector2Int(spawnRoom.xMin + spawnRoom.width / 2, spawnRoom.yMin + spawnRoom.height / 2);
-
-        Debug.Log(
-            $"Selected spawn room: {spawnRoomIndex}, " +
-            $"Connections: {corridorGenerator.ConnectionCounts[spawnRoomIndex]}"
-        );
 
         float rewardChance = normalRoomRewardChance;
 

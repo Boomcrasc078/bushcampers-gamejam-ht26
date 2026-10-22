@@ -15,3 +15,4 @@ MonoBehaviour:
   firePerSecond: 1
   bulletsPerShot: 1
   bulletSpreadDegrees: 0
+  bulletSpeed: 7

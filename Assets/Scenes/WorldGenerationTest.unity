@@ -2128,6 +2128,8 @@ MonoBehaviour:
   - {fileID: 958378965}
   - {fileID: 1858117402}
   - {fileID: 1895936682}
+  - {fileID: 1811985843}
+  - {fileID: 1349314415}
 --- !u!1 &624846343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,6 +2264,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 38bc4e9a2ab8374419869f1a4ccf1604, type: 2}
   - {fileID: 11400000, guid: ff7e36c009bf9ef4e8b8eca4191e01c2, type: 2}
   - {fileID: 11400000, guid: 182df750a547b424dbb1c92b1e773388, type: 2}
+  - {fileID: 11400000, guid: 14779b54fea551c4c8c48f68ba1ec6fa, type: 2}
+  - {fileID: 11400000, guid: 000cd22ce6321304aae42867c41dac2c, type: 2}
   shopItemPrefab: {fileID: 4342271545775392125, guid: 94e2a7664ab8042e0b6d70c3fb35f91f, type: 3}
 --- !u!114 &627611153
 MonoBehaviour:
@@ -3136,6 +3140,8 @@ Transform:
   - {fileID: 958378966}
   - {fileID: 1858117403}
   - {fileID: 1895936683}
+  - {fileID: 1811985842}
+  - {fileID: 1349314416}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882071453
@@ -3984,6 +3990,51 @@ Transform:
   - {fileID: 1263853822}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1349314414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1349314416}
+  - component: {fileID: 1349314415}
+  m_Layer: 0
+  m_Name: MultishotUpgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1349314415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349314414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008a9651394a5c9499bcb920b1c5213e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MultishotUpgrade
+  additionalProjectilesPerLevel: 1
+--- !u!4 &1349314416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349314414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 797034565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1391344506
 GameObject:
   m_ObjectHideFlags: 0
@@ -4186,10 +4237,10 @@ MonoBehaviour:
     unlockTime: 0
   - enemy: {fileID: 11400000, guid: 16b66848abe3bfe46a54431d58b6e803, type: 2}
     unlockTime: 120
-  spawnInterval: 10
-  startingSpawnCount: 5
-  maxAliveEnemies: 100
-  difficultyIncreaseInterval: 100
+  spawnInterval: 5
+  startingSpawnCount: 3
+  maxAliveEnemies: 500
+  difficultyIncreaseInterval: 45
   extraEnemiesPerIncrease: 1
 --- !u!1 &1513884118
 GameObject:
@@ -5008,6 +5059,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799913758}
   m_CullTransparentMesh: 1
+--- !u!1 &1811985841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1811985842}
+  - component: {fileID: 1811985843}
+  m_Layer: 0
+  m_Name: ProjectileDamageUpgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1811985842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811985841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 797034565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1811985843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811985841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6d46313e5f875d46a0305bfb382951f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileDamageUpgrade
+  damageIncreasePerLevel: 0.15
 --- !u!1 &1858117401
 GameObject:
   m_ObjectHideFlags: 0

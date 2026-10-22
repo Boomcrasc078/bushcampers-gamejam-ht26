@@ -39,7 +39,6 @@ public static class SaveManager
             if (data == null)
                 throw new Exception("Save file empty or ivadlid");
 
-            Debug.Log("Progression loaded correct");
             return data;
         }
         catch(Exception e)
