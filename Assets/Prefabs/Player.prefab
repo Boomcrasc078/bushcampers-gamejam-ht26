@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1979923199369331407}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4457205298300819645}
   - component: {fileID: 4382065214114150472}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4853258435064591932}
   - component: {fileID: 4559600712743373859}
   - component: {fileID: 5909281774525739165}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 8030711111142634297}
   - component: {fileID: 2743211009102715248}
   - component: {fileID: 3893533458180174716}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -333,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   mainGameObject: {fileID: 8054339920877794812}
   startingHealth: 10
+  usePermanentHealthUpgrade: 1
 --- !u!114 &2743211009102715248
 MonoBehaviour:
   m_ObjectHideFlags: 0

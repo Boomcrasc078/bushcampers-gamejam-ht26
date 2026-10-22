@@ -27,12 +27,24 @@ public class RunManager : MonoBehaviour
     private float elapsedTime;
     private float spawnTimer;
 
+    private int enemiesKilled;
+
+    public float ElapsedTime => elapsedTime;
+    public int EnemiesKilled => enemiesKilled;
+
+    public void RegisterEnemyKill()
+    {
+        enemiesKilled++;
+    }
+
+
     public void Initialize(EnemySpawner spawner)
     {
         enemySpawner = spawner;
 
         elapsedTime = 0f;
         spawnTimer = 0f;
+        enemiesKilled = 0;
 
         SpawnEnemies();
     }

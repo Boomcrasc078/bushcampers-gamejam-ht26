@@ -11,6 +11,7 @@ public class WorldGeneration : MonoBehaviour
     [SerializeField] private int width = 96;
     [SerializeField] private int height = 96;
     [SerializeField] private int seed = 12345;
+    [SerializeField] private bool randomizeSeed = true;
 
     [Header("Room Settings")]
     [SerializeField] private int roomCount = 18;
@@ -82,6 +83,14 @@ public class WorldGeneration : MonoBehaviour
 
     public void GenerateWorld()
     {
+        if (randomizeSeed)
+        {
+            seed = Random.Range(0, int.MaxValue);
+        }
+
+        Debug.Log($"Generateing world with seed :{seed}");
+
+
         if (corridorWidth < 1)
         {
             Debug.LogError("Corridor width must be at least 1");

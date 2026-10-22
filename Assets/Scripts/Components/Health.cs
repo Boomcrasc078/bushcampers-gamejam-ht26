@@ -1,34 +1,43 @@
 using UnityEngine;
-using UnityEngine.InputSystem.Composites;
-using UnityEngine.Video;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private GameObject mainGameObject;
     [SerializeField] private float startingHealth = 10f;
+    [SerializeField] private bool usePermanentHealthUpgrade = false;
+
 
     private float healthAmount;
-    private HealthUpgrade healthUpgrade;
     private bool isDead = false;
 
-    void Awake()
+
+
+    private float GetHealthUpgrade()
     {
-        healthUpgrade = GetComponent<HealthUpgrade>();
+        if (!usePermanentHealthUpgrade)
+            return 0f;
+
+        if (ShopUpgradeManager.instance == null)
+            return 0f;
+
+        HealthUpgrade upgrade =
+            ShopUpgradeManager.instance.GetUpgrade<HealthUpgrade>();
+
+        return upgrade != null
+            ? upgrade.GetHealthIncrease()
+            : 0f;
     }
 
-    float GetHealthUpgrade()
-    {
-        if (healthUpgrade != null)
-        {
-            return healthUpgrade.GetHealthIncrease();
-        }
-        return 0f;
-    }
 
     void Start()
     {
         healthAmount = startingHealth;
         healthAmount += GetHealthUpgrade();
+
+        if (usePermanentHealthUpgrade)
+        {
+            Debug.Log($"Player starting HP: {healthAmount}");
+        }
     }
 
     public void TakeDamage(float damage)

@@ -1,11 +1,12 @@
+
 using UnityEngine;
 
 public class SpeedUpgrade : Upgrade
 {
-    [SerializeField] float speedMultiplier = 1.2f;
+    [SerializeField] private float speedIncreasePerLevel = 0.07f;
 
     public float GetUpgradeMultiplier()
     {
-        return Mathf.Pow(speedMultiplier, Level);
+        return 1f + (speedIncreasePerLevel * Level);
     }
 }

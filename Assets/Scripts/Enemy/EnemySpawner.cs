@@ -154,6 +154,13 @@ public class EnemySpawner : MonoBehaviour
                 shooting.Initialize(enemyType.damage);
             }
 
+            TrainingDataDrop drop = enemy.GetComponent<TrainingDataDrop>();
+
+            if (drop != null)
+            {
+                drop.Initialize(enemyType.trainingDataDropAmount);
+            }
+
 
 
             spawnedPositions.Add(spawnPosition2D);

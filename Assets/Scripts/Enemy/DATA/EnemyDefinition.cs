@@ -21,6 +21,8 @@ public class EnemyDefinition : ScriptableObject
     public float attackCooldown = 0.3f;
     public float knockbackStrength = 0f;
 
+    [Header("Rewards")]
+    public float trainingDataDropAmount = 128f;
 
     [Header("Spawning")]
     public float spawnWeight = 1f;

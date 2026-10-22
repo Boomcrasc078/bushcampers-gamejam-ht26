@@ -12,18 +12,29 @@ public class Shooting : MonoBehaviour
     private ShootingRateUpgrade shootingRateUpgrade;
 
     private float bulletDamage = 1f;
+    private bool isPlayerWeapon;
 
 
     void Awake()
     {
         shootingInterface = GetComponent<IShooting>();
-        shootingRateUpgrade = GetComponent<ShootingRateUpgrade>();
+
+        // Only player gets upgrades
+        isPlayerWeapon = GetComponent<PlayerInput>() != null;
+
+        if (isPlayerWeapon && ShopUpgradeManager.instance != null)
+        {
+            shootingRateUpgrade =
+                ShopUpgradeManager.instance.GetUpgrade<ShootingRateUpgrade>();
+        }
     }
+
 
     void Start()
     {
         StartCoroutine(ShootCoroutine());
     }
+
 
     IEnumerator ShootCoroutine()
     {
@@ -32,18 +43,23 @@ public class Shooting : MonoBehaviour
             while (shootingInterface.IsShooting())
             {
                 Shoot();
-                if (ShopUpgradeManager.instance.ActivatedUpgrades.Contains(shootingRateUpgrade))
+
+                float fireRate = shootingType.firePerSecond;
+
+                if (shootingRateUpgrade != null)
                 {
-                    yield return new WaitForSeconds(1 / shootingType.firePerSecond * shootingRateUpgrade.GetShootingRateUpgrade());
+                    fireRate *= shootingRateUpgrade.GetShootingRateUpgrade();
                 }
-                else
-                {
-                    yield return new WaitForSeconds(1 / shootingType.firePerSecond);
-                }
+
+                yield return new WaitForSeconds(
+                    1f / Mathf.Max(0.01f, fireRate)
+                );
             }
+
             yield return null;
         }
     }
+
     private void Shoot()
     {
         var bullets = shootingType.bulletsPerShot;
@@ -53,6 +69,21 @@ public class Shooting : MonoBehaviour
             var spreadAngle = Random.Range(-spread / 2f, spread / 2f);
             var bulletRotation = rotationTransform.rotation * Quaternion.Euler(0f, 0f, spreadAngle);
             var bullet = GameObject.Instantiate(bulletPrefab, firePositionTransform.position, bulletRotation);
+
+
+            string bulletLayerName = isPlayerWeapon ? "PlayerBullet" : "EnemyBullet";
+
+            int bulletLayer = LayerMask.NameToLayer(bulletLayerName);
+
+            if (bulletLayer >= 0)
+            {
+                bullet.layer = bulletLayer;
+            }
+            else
+            {
+                Debug.LogError($"Missing layer: {bulletLayerName}");
+            }
+
 
             Bullet bulletComponent = bullet.GetComponent<Bullet>();
 

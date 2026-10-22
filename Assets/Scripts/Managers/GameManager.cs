@@ -1,6 +1,9 @@
-using System;
 using UnityEngine;
-using System.Collections.Generic;
+using TMPro;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+
+
 public class GameManager : MonoBehaviour
 {
     [Header("References")]
@@ -12,10 +15,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private EnemyDefinition basicEnemy;
 
+    [Header("UI")]
+    [SerializeField] private GameObject runSummaryPanel;
+    [SerializeField] private GameObject shopPanel;
+
+    [Header("Run Statistics UI")]
+    [SerializeField] private TMP_Text survivalTimeText;
+    [SerializeField] private TMP_Text enemiesKilledText;
+    [SerializeField] private TMP_Text trainingDataEarnedText;
+
     private Transform playerTransform;
     private GridNavigation navigation;
     private Vector2Int lastPlayerCell;
     private bool runEnded = false;
+    private float trainingDataAtRunStart;
 
 
 
@@ -23,6 +36,8 @@ public class GameManager : MonoBehaviour
     {
         //load current upgrades etc
         SaveManager.LoadCurrentProgression();
+
+        trainingDataAtRunStart = TrainingDataManager.instance.TrainingDataUnformatted;
 
         //gen world
         worldGeneration.GenerateWorld();
@@ -132,7 +147,62 @@ public class GameManager : MonoBehaviour
         //freeze game
         Time.timeScale = 0f;
 
+        UpdateRunSummary();
+        runSummaryPanel.SetActive(true);
+        shopPanel.SetActive(false);
+
         Debug.Log("RUN ENDED : progress saved");
 
     }
+
+    public void ShowShop()
+    {
+        runSummaryPanel.SetActive(false);
+        shopPanel.SetActive(true);
+    }
+
+    public void ShowRunSummary()
+    {
+        runSummaryPanel.SetActive(true);
+        shopPanel.SetActive(false);
+    }
+
+
+    private void UpdateRunSummary()
+    {
+        // survival time
+        int totalSeconds = Mathf.FloorToInt(runManager.ElapsedTime);
+
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+
+        survivalTimeText.text = $"{minutes:00}:{seconds:00}";
+
+        // kills
+        enemiesKilledText.text = runManager.EnemiesKilled.ToString();
+
+        // collected training data
+        float collected = Mathf.Max(
+            0f,
+            TrainingDataManager.instance.TrainingDataUnformatted
+            - trainingDataAtRunStart
+        );
+
+        trainingDataEarnedText.text =
+            TrainingDataDisplay.FormatTrainingData(collected);
+    }
+
+    public void RestartRun()
+    {
+        //save
+        SaveManager.SaveCurrentProgression();
+
+        //resume time freeze
+        Time.timeScale = 1f;
+
+        //reload scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
 }
