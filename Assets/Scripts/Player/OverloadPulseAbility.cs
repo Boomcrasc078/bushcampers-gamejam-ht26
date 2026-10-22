@@ -14,6 +14,9 @@ public class OverloadPulseAbility : MonoBehaviour
     [Header("Charges")]
     [SerializeField] private int maxCharges = 1;
 
+    [Header("Visual Effects")]
+    [SerializeField] private ParticleSystem shockwavePrefab;
+
     private int currentCharges = 0;
     private Health playerHealth;
 
@@ -51,6 +54,15 @@ public class OverloadPulseAbility : MonoBehaviour
 
         currentCharges--;
 
+        if (shockwavePrefab != null)
+        {
+            Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
+            Debug.Log("showwave spawned");
+        }
+        else
+        {
+            Debug.LogWarning("no prefab");
+        }
 
         playerHealth.GrantInvulnerability(invulnerabilityDuration);
 

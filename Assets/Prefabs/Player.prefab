@@ -405,3 +405,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   maxCharges: 1
+  shockwavePrefab: {fileID: 1504511474030213336, guid: 4ec7ed117edddee4ca128bdc7a66f102, type: 3}
