@@ -10,6 +10,8 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform firePositionTransform;
     IShooting shootingInterface;
     private ShootingRateUpgrade shootingRateUpgrade;
+    [Header("Audio")]
+    [SerializeField] private Sound shootSound;
 
     void Awake()
     {
@@ -44,6 +46,7 @@ public class Shooting : MonoBehaviour
 
     private void Shoot()
     {
+        AudioManager.instance.PlaySound(shootSound, gameObject);
         var bullets = shootingType.bulletsPerShot;
         for (int i = 0; i < bullets; i++)
         {
