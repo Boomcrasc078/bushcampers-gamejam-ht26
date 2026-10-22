@@ -40,10 +40,6 @@ public class WorldGeneration : MonoBehaviour
         roomIncreaseUpgrade = GetComponent<RoomIncreaseUpgrade>();
     }
 
-    private void Start()
-    {
-        GenerateWorld();
-    }
 
     private int UpdateRoomCount(int currentCount)
     {
@@ -239,6 +235,16 @@ public class WorldGeneration : MonoBehaviour
             rewardLocations.Add(rewardCell);
         }
         return rewardLocations;
+    }
+
+    public Vector2Int WorldToCell(Vector3 worldPosition)
+    {
+        return worldRenderer.WorldToCell(worldPosition);
+    }
+
+    public Vector3 CellToWorld(Vector2Int cell)
+    {
+        return worldRenderer.GetCellCenterWorld(cell);
     }
 
 
