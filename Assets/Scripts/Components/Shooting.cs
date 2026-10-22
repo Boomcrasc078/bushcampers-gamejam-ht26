@@ -18,6 +18,7 @@ public class Shooting : MonoBehaviour
 
     private PiercingUpgrade piercingUpgrade;
     private KnockbackUpgrade knockbackUpgrade;
+    private ProjectileVelocityUpgrade projectileVelocityUpgrade;
 
 
     void Awake()
@@ -33,6 +34,8 @@ public class Shooting : MonoBehaviour
             piercingUpgrade = ShopUpgradeManager.instance.GetUpgrade<PiercingUpgrade>();
 
             knockbackUpgrade = ShopUpgradeManager.instance.GetUpgrade<KnockbackUpgrade>();
+
+            projectileVelocityUpgrade = ShopUpgradeManager.instance.GetUpgrade<ProjectileVelocityUpgrade>();
         }
     }
 
@@ -111,7 +114,18 @@ public class Shooting : MonoBehaviour
 
             var bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
 
-            bulletRigidbody.AddRelativeForce(Vector2.up * shootingType.bulletSpeed);
+
+
+            float speedMultiplier = projectileVelocityUpgrade != null ? projectileVelocityUpgrade.GetSpeedMultiplier() : 1f;
+
+            if (isPlayerWeapon)
+            {
+                Debug.Log($"Projectile Velocity | Level: {projectileVelocityUpgrade?.Level ?? 0} | Multiplier: {speedMultiplier:F2}x | Base Force: {shootingType.bulletSpeed} | Final Force: {shootingType.bulletSpeed * speedMultiplier:F2}");
+            }
+
+            bulletRigidbody.AddRelativeForce(Vector2.up * shootingType.bulletSpeed * speedMultiplier);
+
+
         }
     }
 

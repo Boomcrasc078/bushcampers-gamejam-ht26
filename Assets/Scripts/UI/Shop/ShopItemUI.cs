@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using TMPro;
 
@@ -7,8 +8,9 @@ public class ShopItemUI : MonoBehaviour
     [SerializeField] private TMP_Text itemDescriptionText;
     [SerializeField] private TMP_Text itemButtonText;
     [SerializeField] private TMP_Text itemCostText;
-    private ShopItem shopItem;
+    [SerializeField] private TMP_Text itemLevelText;
 
+    private ShopItem shopItem;
     private Upgrade upgrade;
     private ShopUpgradeManager upgradeManager;
 
@@ -20,13 +22,14 @@ public class ShopItemUI : MonoBehaviour
     public void OnButtonPress()
     {
         var trainingDataManager = TrainingDataManager.instance;
+
         if (trainingDataManager.HasEnoughTrainingData(GetCost()))
         {
             trainingDataManager.DecreaseTrainingData(GetCost());
             upgradeManager.Upgrade(upgrade);
         }
 
-        //save currency and upgrades
+        // Save currency and upgrades.
         SaveManager.SaveCurrentProgression();
     }
 
@@ -47,6 +50,8 @@ public class ShopItemUI : MonoBehaviour
     {
         if (upgrade != null)
         {
+            itemLevelText.text = $"LEVEL {upgrade.Level}";
+
             if (upgradeManager.ActivatedUpgrades.Contains(upgrade))
             {
                 itemButtonText.text = shopItem.upgradeText;
@@ -57,7 +62,6 @@ public class ShopItemUI : MonoBehaviour
             }
 
             itemCostText.text = $"{TrainingDataDisplay.FormatTrainingData(GetCost())} REQUIRED";
-
         }
     }
 }
