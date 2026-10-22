@@ -34,32 +34,12 @@ public class WorldGeneration : MonoBehaviour
 
     private List<RectInt> rooms;
     private MapEnlargmentUpgrade mapEnlargmentUpgrade;
-    private RoomIncreaseUpgrade roomIncreaseUpgrade;
-    void Awake()
-    {
-        mapEnlargmentUpgrade = GetComponent<MapEnlargmentUpgrade>();
-        roomIncreaseUpgrade = GetComponent<RoomIncreaseUpgrade>();
-    }
+    private RoomSizeUpgrade roomSizeUpgrade;
+    private PowerupChanceUpgrade powerupChanceUpgrade;
 
 
-    private int UpdateRoomCount(int currentCount)
-    {
-        float roomCountFloat = currentCount;
 
-        if (ShopUpgradeManager.instance == null)
-        {
-            return currentCount;
-        }
 
-        if (ShopUpgradeManager.instance.ActivatedUpgrades.Contains(roomIncreaseUpgrade))
-        {
-            return Mathf.RoundToInt(roomCountFloat *= roomIncreaseUpgrade.GetRoomIncreaseUpgrade());
-        }
-        else
-        {
-            return currentCount;
-        }
-    }
 
     private int UpdateRoomSize(int currentSize)
     {
@@ -83,6 +63,15 @@ public class WorldGeneration : MonoBehaviour
 
     public void GenerateWorld()
     {
+        if (ShopUpgradeManager.instance != null)
+        {
+            mapEnlargmentUpgrade = ShopUpgradeManager.instance.GetUpgrade<MapEnlargmentUpgrade>();
+
+            roomSizeUpgrade = ShopUpgradeManager.instance.GetUpgrade<RoomSizeUpgrade>();
+
+            powerupChanceUpgrade = ShopUpgradeManager.instance.GetUpgrade<PowerupChanceUpgrade>();
+        }
+
         if (randomizeSeed)
         {
             seed = Random.Range(0, int.MaxValue);
@@ -97,24 +86,69 @@ public class WorldGeneration : MonoBehaviour
             return;
         }
 
-        var roomCount = UpdateRoomCount(this.roomCount);
         var width = UpdateRoomSize(this.width);
         var height = UpdateRoomSize(this.height);
 
-        // 1. Create the world grid (initially all walls)
+
+        float roomSizeMultiplier = roomSizeUpgrade != null
+            ? roomSizeUpgrade.GetRoomSizeMultiplier()
+            : 1f;
+
+        float mapAreaMultiplier =
+            (float)width * height / ((float)this.width * this.height);
+
+        float roomAreaMultiplier =
+            roomSizeMultiplier * roomSizeMultiplier;
+
+        int roomCount = Mathf.Max(
+            1,
+            Mathf.RoundToInt(
+                this.roomCount * mapAreaMultiplier / roomAreaMultiplier
+            )
+        );
+
+
+
+
+        int upgradedMinRoomSize = Mathf.Max(
+            3,
+            Mathf.RoundToInt(minRoomSize * roomSizeMultiplier)
+        );
+
+        int upgradedMaxRoomSize = Mathf.Max(
+            upgradedMinRoomSize,
+            Mathf.RoundToInt(maxRoomSize * roomSizeMultiplier)
+        );
+
+
+        // 1. Create the world grid
         WorldGrid world = new WorldGrid(width, height);
 
         // 2. Generate rooms
         RoomGenerator roomGenerator = new RoomGenerator();
 
+
         rooms = roomGenerator.GenerateRooms(
             width,
             height,
             roomCount,
-            minRoomSize,
-            maxRoomSize,
+            upgradedMinRoomSize,
+            upgradedMaxRoomSize,
             seed
         );
+
+        Debug.Log(
+            $"Map: {width}x{height}, " +
+            $"Rooms: {rooms.Count}/{roomCount}, " +
+            $"Room sizes: {upgradedMinRoomSize}-{upgradedMaxRoomSize}"
+        );
+
+        Debug.Log(
+            $"Generated map: {width}x{height}, " +
+            $"Requested rooms: {roomCount}, " +
+            $"Actual rooms: {rooms.Count}"
+        );
+
 
         if (rooms.Count == 0)
         {
@@ -137,7 +171,7 @@ public class WorldGeneration : MonoBehaviour
         );
 
         //5. Find a room closest to the middle that isn't a dead end
-        int spawnRoomIndex = FindSpawnRoom(rooms, corridorGenerator.ConnectionCounts);
+        int spawnRoomIndex = FindSpawnRoom(rooms, corridorGenerator.ConnectionCounts, width, height);
 
         RectInt spawnRoom = rooms[spawnRoomIndex];
 
@@ -148,10 +182,29 @@ public class WorldGeneration : MonoBehaviour
             $"Connections: {corridorGenerator.ConnectionCounts[spawnRoomIndex]}"
         );
 
-        //6
+        float rewardChance = normalRoomRewardChance;
 
-        RewardSpawnCells = GenerateRewardsLocations(rooms, corridorGenerator.ConnectionCounts, spawnRoomIndex, seed, normalRoomRewardChance);
-        Debug.Log($"Generated {RewardSpawnCells.Count} reward locations.");
+        if (powerupChanceUpgrade != null)
+        {
+            rewardChance += powerupChanceUpgrade.GetChanceBonus();
+        }
+
+        // prob only between 0 and 100.
+        rewardChance = Mathf.Clamp01(rewardChance);
+
+        RewardSpawnCells = GenerateRewardsLocations(
+            rooms,
+            corridorGenerator.ConnectionCounts,
+            spawnRoomIndex,
+            seed,
+            rewardChance
+        );
+
+        Debug.Log(
+            $"Reward chance: {rewardChance:P0}, " +
+            $"Reward locations: {RewardSpawnCells.Count}"
+        );
+
 
 
         // 6. Render the finished world
@@ -179,9 +232,9 @@ public class WorldGeneration : MonoBehaviour
     }
 
 
-    private int FindSpawnRoom(List<RectInt> rooms, int[] connectionCounts)
+    private int FindSpawnRoom(List<RectInt> rooms, int[] connectionCounts, int mapWidth, int mapHeight)
     {
-        Vector2 mapCenter = new Vector2(width / 2f, height / 2f);
+        Vector2 mapCenter = new Vector2(mapWidth / 2f, mapHeight / 2f);
 
         int spawnRoomIndex = -1;
         float shortestDistance = float.MaxValue;

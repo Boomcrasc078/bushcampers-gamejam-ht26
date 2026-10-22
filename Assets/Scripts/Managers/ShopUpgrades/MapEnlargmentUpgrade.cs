@@ -1,10 +1,12 @@
+
 using UnityEngine;
+
 public class MapEnlargmentUpgrade : Upgrade
 {
-    [SerializeField] private float mapSizeMultiplier = 1.3f;
+    [SerializeField] private float mapIncreasePerLevel = 0.1f;
 
     public float GetMapSizeUpgrade()
     {
-        return Mathf.Pow(mapSizeMultiplier, Level);
+        return 1f + mapIncreasePerLevel * Level;
     }
 }
