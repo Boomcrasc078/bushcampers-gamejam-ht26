@@ -68,10 +68,13 @@ public class Health : MonoBehaviour
             isDead = true;
             Die();
         }
+
+        AudioManager.instance.PlaySound(hurtSound, gameObject);
     }
 
     void Die()
     {
+        AudioManager.instance.PlaySound(deathSound, gameObject);    
         var onDeath = GetComponent<IOnDeath>();
 
         if (onDeath != null)

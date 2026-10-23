@@ -2675,7 +2675,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6126773112791398878, guid: 445dad653d369d440ba35a3dff84ec81, type: 3}
   rotationTransform: {fileID: 4853258435064591932}
   firePositionTransform: {fileID: 1979923199369331407}
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 11400000, guid: cda5cfb2af6ef40cb99f4ae350dd33e0, type: 2}
   shootParticleSystem: {fileID: 4744809125952560197}
   animator: {fileID: 4275360351555088330}
 --- !u!114 &7703945237733956529
@@ -2717,7 +2717,7 @@ MonoBehaviour:
   mainGameObject: {fileID: 8054339920877794812}
   startingHealth: 10
   usePermanentHealthUpgrade: 1
-  hurtSound: {fileID: 0}
+  hurtSound: {fileID: 11400000, guid: eccb4008eae354210921418926f4da9f, type: 2}
   deathSound: {fileID: 0}
   animator: {fileID: 4275360351555088330}
 --- !u!114 &2743211009102715248
