@@ -5,7 +5,8 @@ public class PickupMagnet : MonoBehaviour
 {
     [Header("Attraction")]
     [SerializeField] private float pullDistance = 3f;
-    [SerializeField] private float pullSpeed = 3f;
+    [SerializeField] private float minPullSpeed = 0.35f;
+    [SerializeField] private float maxPullSpeed = 7f;
 
     private Transform playerTransform;
     private Rigidbody2D rb;
@@ -25,7 +26,6 @@ public class PickupMagnet : MonoBehaviour
 
     private void Update()
     {
-        // The player may be spawned after the pickup.
         if (playerTransform == null)
         {
             PlayerMovement player = FindAnyObjectByType<PlayerMovement>();
@@ -34,6 +34,7 @@ public class PickupMagnet : MonoBehaviour
                 playerTransform = player.transform;
         }
     }
+
 
     private void FixedUpdate()
     {
@@ -46,14 +47,25 @@ public class PickupMagnet : MonoBehaviour
         Vector2 currentPosition = rb != null ? rb.position : (Vector2)transform.position;
         Vector2 targetPosition = playerTransform.position;
 
-        if (Vector2.Distance(currentPosition, targetPosition) >= effectivePullDistance)
+        float distance = Vector2.Distance(currentPosition, targetPosition);
+
+        if (distance >= effectivePullDistance)
             return;
 
-        Vector2 nextPosition = Vector2.MoveTowards(currentPosition, targetPosition, pullSpeed * Time.fixedDeltaTime);
+        float proximity = 1f - Mathf.Clamp01(distance / effectivePullDistance);
+
+        float accelerationCurve = proximity * proximity * proximity;
+
+        float speedUpgradeMultiplier = 1f + (multiplier - 1f) * 0.5f;
+
+        float effectiveSpeed = Mathf.Lerp(minPullSpeed, maxPullSpeed, accelerationCurve) * speedUpgradeMultiplier;
+
+        Vector2 nextPosition = Vector2.MoveTowards(currentPosition, targetPosition, effectiveSpeed * Time.fixedDeltaTime);
 
         if (rb != null)
             rb.MovePosition(nextPosition);
         else
             transform.position = new Vector3(nextPosition.x, nextPosition.y, transform.position.z);
     }
+
 }
