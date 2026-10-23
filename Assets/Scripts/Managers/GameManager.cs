@@ -192,6 +192,13 @@ public class GameManager : MonoBehaviour
             TrainingDataDisplay.FormatTrainingData(collected);
     }
 
+    public void GoToMainMenu()
+    {
+        SaveManager.SaveCurrentProgression();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void RestartRun()
     {
         //save
