@@ -6,7 +6,7 @@ public class TrainingDataPickup : MonoBehaviour
 {
     [SerializeField] private float pickupDistance = 1f;
     [SerializeField, Min(1f)] private float lifetime = 30f;
-    []
+
     private float trainingDataAmount;
     private PickupMagnet magnet;
 
