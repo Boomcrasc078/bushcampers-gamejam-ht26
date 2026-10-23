@@ -10309,15 +10309,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-<<<<<<< Updated upstream
-    y: 0.0013755158
-    width: 1
-    height: 0.99587345
-=======
     y: 0
     width: 1
     height: 1
->>>>>>> Stashed changes
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
