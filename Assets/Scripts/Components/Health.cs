@@ -11,6 +11,9 @@ public class Health : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private Sound hurtSound;
     [SerializeField] private Sound deathSound;
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
 
     private float healthAmount;
     private bool isDead = false;
@@ -74,6 +77,11 @@ public class Health : MonoBehaviour
         if (onDeath != null)
         {
             onDeath.OnDeath();
+        }
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Death");
         }
 
         Destroy(mainGameObject);

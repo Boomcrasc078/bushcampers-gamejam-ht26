@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyHitReaction : MonoBehaviour
+public class EnemyHitReaction : MonoBehaviour, IHitReaction
 {
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 1f;
@@ -12,6 +12,8 @@ public class EnemyHitReaction : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Color hitColor = Color.red;
     [SerializeField] private float flashDuration = 0.1f;
+    [Header("Particle Effects")]
+    [SerializeField] GameObject bloodSplatPrefab;
 
     private Rigidbody2D rb;
     private Color originalColor;
@@ -44,6 +46,8 @@ public class EnemyHitReaction : MonoBehaviour
                 enemyMovement.PauseForKnockback(knockbackDuration);
 
             rb.AddForce(direction.normalized * knockbackForce * multiplier, ForceMode2D.Impulse);
+
+            Instantiate(bloodSplatPrefab, transform.position, new Quaternion());
         }
 
 

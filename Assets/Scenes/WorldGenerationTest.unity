@@ -4765,6 +4765,7 @@ MonoBehaviour:
   comboWindow: 6
   comboBonusPerKill: 0.05
   maxComboMultiplier: 1.5
+  comboTierKillThresholds: 020000000400000006000000090000000c0000001000000014000000190000001e00000024000000i
 --- !u!1 &1513884118
 GameObject:
   m_ObjectHideFlags: 0
@@ -5733,7 +5734,9 @@ MonoBehaviour:
   multiplierText: {fileID: 1485352998}
   killCountText: {fileID: 170110877}
   timerFill: {fileID: 1291811467}
+  timerBackgroundRect: {fileID: 0}
   multiplierRect: {fileID: 1485352997}
+  nextTierText: {fileID: 0}
   pulseScale: 1.25
   growDuration: 0.08
   shrinkDuration: 0.12
@@ -7163,8 +7166,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.9992903
-    height: 0.99873894
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

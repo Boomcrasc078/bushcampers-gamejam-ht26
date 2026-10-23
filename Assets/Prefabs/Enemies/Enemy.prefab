@@ -169,6 +169,8 @@ MonoBehaviour:
   rotationTransform: {fileID: 5601101712990778187}
   firePositionTransform: {fileID: 2561810416744576933}
   shootSound: {fileID: 0}
+  shootParticleSystem: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &1906516889780290986
 Rigidbody2D:
   serializedVersion: 5
@@ -249,6 +251,7 @@ MonoBehaviour:
   usePermanentHealthUpgrade: 0
   hurtSound: {fileID: 0}
   deathSound: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &4590567889936264807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +269,7 @@ MonoBehaviour:
   healthDropChance: 0.06
   overloadPulsePickupPrefab: {fileID: 3585745183590748557, guid: 69bde91727b9a8e4faf34285a73fbc55, type: 3}
   overloadPulseDropChance: 0.01
+  dropScatterRadius: 0.45
 --- !u!114 &7808439527508617227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +287,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3254797091247995299}
   hitColor: {r: 0.40392157, g: 0, b: 1, a: 1}
   flashDuration: 0.1
+  bloodSplatPrefab: {fileID: 1831168175219747353, guid: 3ecbdbac76b2340499f638cf7c233c62, type: 3}
 --- !u!1 &9154522702735139457
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +369,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 16f1bcee4ebc5f64388cc1a71c79ec30, type: 3}
+  m_Sprite: {fileID: -6129559744034909708, guid: 7e621943ec98a884b9ed940e3d38323e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

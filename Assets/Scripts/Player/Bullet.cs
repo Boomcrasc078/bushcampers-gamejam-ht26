@@ -29,13 +29,15 @@ public class Bullet : MonoBehaviour
             if (!hitEnemies.Add(hitHealth))
                 return;
 
-            EnemyHitReaction hitReaction = hitHealth.GetComponent<EnemyHitReaction>();
+            IHitReaction hitReaction = hitHealth.GetComponent<IHitReaction>();
 
             if (hitReaction != null && gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))
             {
                 Vector2 knockbackDirection = transform.up;
                 Debug.Log($"Bullet knockback multiplier: {knockbackMultiplier}");
+
                 hitReaction.ReactToHit(knockbackDirection, knockbackMultiplier);
+
             }
 
             hitHealth.TakeDamage(damage);

@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float knockbackRecovery = 25f;
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
 
     private Vector2 knockbackVelocity;
 
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         float controlMultiplier = knockbackVelocity.sqrMagnitude > 0.01f ? 0.25f : 1f;
         rigidbody2D.linearVelocity = direction * speed * controlMultiplier + knockbackVelocity;
         knockbackVelocity = Vector2.MoveTowards(knockbackVelocity, Vector2.zero, knockbackRecovery * Time.fixedDeltaTime);
+        animator.SetFloat("Velocity", Mathf.Abs(rigidbody2D.linearVelocity.SqrMagnitude()));
     }
 
 
