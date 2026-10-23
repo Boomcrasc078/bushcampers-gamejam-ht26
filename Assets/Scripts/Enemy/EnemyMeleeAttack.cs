@@ -109,6 +109,8 @@ public class EnemyMeleeAttack : MonoBehaviour
                     direction.normalized * knockbackStrength
                 );
             }
+
+            targetHealth.GetComponent<IHitReaction>().ReactToHit(new Vector2());
         }
 
         // RECOVERY

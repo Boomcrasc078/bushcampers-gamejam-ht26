@@ -11,6 +11,11 @@ public class Shooting : MonoBehaviour
     private ShootingRateUpgrade shootingRateUpgrade;
     [Header("Audio")]
     [SerializeField] private Sound shootSound;
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem shootParticleSystem;
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
 
     private float bulletDamage = 1f;
     private bool isPlayerWeapon;
@@ -127,6 +132,16 @@ public class Shooting : MonoBehaviour
             float projectileSpeed = shootingType.bulletSpeed * speedMultiplier;
 
             bulletRigidbody.linearVelocity = (Vector2)bullet.transform.up * projectileSpeed;
+        }
+
+        if (shootParticleSystem != null)
+        {
+            shootParticleSystem.Play();
+        }
+
+        if(animator != null)
+        {
+            animator.SetTrigger("Shoot");
         }
     }
 
