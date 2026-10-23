@@ -82,9 +82,17 @@ public class Health : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("Death");
+            Invoke(nameof(DestroyMainGameObject), .5f);
+            return;
         }
+        DestroyMainGameObject();
 
+    }
+
+    void DestroyMainGameObject()
+    {
         Destroy(mainGameObject);
+
     }
 
     public void Initialize(float maxHealth)

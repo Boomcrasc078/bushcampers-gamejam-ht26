@@ -15,6 +15,8 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Knockback")]
     private float knockbackEndTime;
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
 
 
 
@@ -239,6 +241,8 @@ public class EnemyMovement : MonoBehaviour
 
         // 7 apply
         rb.linearVelocity = finalDirection * moveSpeed;
+
+        animator.SetFloat("Velocity", rb.linearVelocity.SqrMagnitude());
 
     }
 
