@@ -722,7 +722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &467934495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1953,7 +1953,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n<color=#79D9F3>PS C:\\NEURAL\\SIMULATION></color> <color=#F3DA70>Get-Content .\\credits.txt</color>\n\n<color=#F3DA70>[ DEVELOPMENT TEAM ]</color>\n\n<color=#64E69A>[ DEV ]</color> Vilhelm Sorlien \u2014 Game Design / Programming\n<color=#64E69A>[ DEV ]</color> Mose \u2014 Game Design / Programming\n<color=#64E69A>[ DEV ]</color> Ludvig sjogren \u2014 Audio / Art Design \n\n<color=#F3DA70>[ EXTERNAL RESOURCES ]</color>\n\n<color=#E6F1FF>Asset creator / Resource / License</color>\n\n<color=#64E69A>[ OK ]</color> Credits loaded successfully.\n"
+  m_text: "\n<color=#79D9F3>PS C:\\NEURAL\\SIMULATION></color> <color=#F3DA70>Get-Content .\\credits.txt</color>\n\n<color=#F3DA70>[ DEVELOPMENT TEAM ]</color>\n\n<color=#64E69A>[ DEV ]</color> <size=32>Vilhelm Sorlien</size> \u2014 Game Design / Programming\n<color=#64E69A>[ DEV ]</color> <size=32>Mose Grafstrom</size> \u2014 Game Design / Programming\n<color=#64E69A>[ DEV ]</color> <size=32>Ludvig sjogren</size> \u2014 Audio / Art Design \n\n<color=#F3DA70>[ EXTERNAL RESOURCES ]</color>\n\n<color=#E6F1FF>Asset creator / Resource / License</color>\n\n<color=#64E69A>[ OK ]</color> Credits loaded successfully.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce8c753542c3a49e3a7a27fa15cbbef5, type: 2}
   m_sharedMaterial: {fileID: 6512912258601849938, guid: ce8c753542c3a49e3a7a27fa15cbbef5, type: 2}
@@ -3449,7 +3449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c669277fe38a5d747a744c9114b829a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
-  gameplaySceneName: 
+  gameplaySceneName: WorldGenerationTest
   bootLogPanel: {fileID: 1080732722}
   menuPanel: {fileID: 1248621815}
   creditsPanel: {fileID: 467934494}
