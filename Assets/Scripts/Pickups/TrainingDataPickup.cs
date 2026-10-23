@@ -6,7 +6,8 @@ public class TrainingDataPickup : MonoBehaviour
 {
     [SerializeField] private float pickupDistance = 1f;
     [SerializeField, Min(1f)] private float lifetime = 30f;
-
+    [Header("Audio")]
+    [SerializeField] Sound pickupSound;
     private float trainingDataAmount;
     private PickupMagnet magnet;
 
@@ -38,6 +39,8 @@ public class TrainingDataPickup : MonoBehaviour
             return;
 
         TrainingDataManager.instance.IncreaseTrainingData(trainingDataAmount);
+        AudioManager.instance.PlaySound(pickupSound, AudioManager.instance.gameObject);
         Destroy(gameObject);
     }
+
 }

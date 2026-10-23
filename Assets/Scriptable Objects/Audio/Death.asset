@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a5c6702a80549d199cf1b3a419e21d, type: 3}
   m_Name: Death
   m_EditorClassIdentifier: Assembly-CSharp::Sound
-  audioClip: {fileID: 8300000, guid: 409a8b668d797415488cf1e188d57e44, type: 3}
-  defaultVolume: 0.4
+  audioClip: {fileID: 8300000, guid: 54fd029c461494f5d8e5ac412e77e08d, type: 3}
+  defaultVolume: 0.1
   loop: 0

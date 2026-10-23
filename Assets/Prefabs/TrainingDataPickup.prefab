@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrainingDataPickup
   pickupDistance: 1
   lifetime: 30
+  pickupSound: {fileID: 11400000, guid: ad4f1942059604102815d537af3c14c2, type: 2}
 --- !u!114 &7583185311871073318
 MonoBehaviour:
   m_ObjectHideFlags: 0

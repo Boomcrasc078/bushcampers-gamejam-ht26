@@ -2,11 +2,13 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    [SerializeField] private Sound musicTest;
+    [SerializeField] private Sound mainMenuMusic;
+    [SerializeField] private Sound gameMusic;
     void Awake()
     {
         if (instance != null)
@@ -18,7 +20,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        PlaySound(musicTest, gameObject);
+        PlaySound(gameMusic, gameObject);
     }
 
     public AudioSource PlaySound(Sound sound, GameObject sourceGameObject)

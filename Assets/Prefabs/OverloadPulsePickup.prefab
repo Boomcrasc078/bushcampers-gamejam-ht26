@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a783062f948a1244b841ffdfff2c85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OverloadPulsePickup
+  pickupSound: {fileID: 11400000, guid: 138b8f584c2d444f2852994571644886, type: 2}
 --- !u!114 &3027699542462823193
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthPickup
   healAmount: 2
+  pickupSound: {fileID: 11400000, guid: 9c6ccb61efff2471eaa3e43e02de916e, type: 2}
 --- !u!114 &7461944440799925403
 MonoBehaviour:
   m_ObjectHideFlags: 0
