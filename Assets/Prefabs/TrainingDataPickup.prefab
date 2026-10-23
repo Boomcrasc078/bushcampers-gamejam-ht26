@@ -61,7 +61,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupMagnet
   pullDistance: 3
-  pullSpeed: 6
+  minPullSpeed: 1.2
+  maxPullSpeed: 9
 --- !u!1 &6305601693817693479
 GameObject:
   m_ObjectHideFlags: 0
