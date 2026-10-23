@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ECC Memory Modules
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Error-correcting memory provides additional protection against system failure, increasing maximum integrity by 1 per level.
-  itemBaseCost: 2048
+  itemBaseCost: 20480
   itemCostMultiplier: 1.85
   upgradeIndex: 4
   purchaseText: Purchase

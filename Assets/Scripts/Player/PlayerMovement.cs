@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         speedUpgrade = ShopUpgradeManager.instance != null ? ShopUpgradeManager.instance.GetUpgrade<SpeedUpgrade>() : null;
-        Debug.Log($"Speed Level: {speedUpgrade?.Level}, Multiplier: {GetSpeedUpgrade()}");
     }
 
     private void FixedUpdate()
@@ -33,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
         float speed = moveSpeed * GetSpeedUpgrade();
 
-        rigidbody2D.linearVelocity = direction * speed + knockbackVelocity;
+        float controlMultiplier = knockbackVelocity.sqrMagnitude > 0.01f ? 0.25f : 1f;
+        rigidbody2D.linearVelocity = direction * speed * controlMultiplier + knockbackVelocity;
         knockbackVelocity = Vector2.MoveTowards(knockbackVelocity, Vector2.zero, knockbackRecovery * Time.fixedDeltaTime);
     }
 
@@ -50,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void ApplyKnockback(Vector2 velocity)
     {
-        Debug.Log($"Player received knockback: {velocity}");
         knockbackVelocity = Vector2.ClampMagnitude(knockbackVelocity + velocity, 12f);
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Prediction Accelerator
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Dedicated prediction hardware identifies valuable simulation sectors, increasing optional room reward chance by 5 percentage points per level.
-  itemBaseCost: 4096
+  itemBaseCost: 40960
   itemCostMultiplier: 1.9
   upgradeIndex: 5
   purchaseText: Upgrade

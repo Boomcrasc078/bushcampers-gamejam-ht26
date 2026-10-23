@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Signal Bus Accelerator
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: High-bandwidth signal buses reduce projectile instruction latency, increasing projectile travel speed by 15% per level.
-  itemBaseCost: 1536
+  itemBaseCost: 15360
   itemCostMultiplier: 1.7
   upgradeIndex: 9
   purchaseText: Install

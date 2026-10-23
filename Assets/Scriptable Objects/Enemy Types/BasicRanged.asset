@@ -21,6 +21,6 @@ MonoBehaviour:
   attackWindup: 0.45
   attackRecovery: 0.6
   attackCooldown: 0.3
-  knockbackStrength: 0
-  trainingDataDropAmount: 128
+  knockbackStrength: 1
+  trainingDataDropAmount: 1280
   spawnWeight: 4

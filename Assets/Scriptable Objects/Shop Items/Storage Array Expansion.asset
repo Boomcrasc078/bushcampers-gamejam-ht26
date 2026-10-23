@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Storage Array Expansion
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Additional storage capacity allows the AI to simulate a larger environment, increasing generated map size by 10% per level.
-  itemBaseCost: 3072
+  itemBaseCost: 30720
   itemCostMultiplier: 1.65
   upgradeIndex: 1
   purchaseText: Install

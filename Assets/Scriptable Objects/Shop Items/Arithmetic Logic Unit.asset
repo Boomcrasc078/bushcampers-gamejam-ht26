@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Arithmetic Logic Unit
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Additional arithmetic logic units enhance attack calculations, increasing projectile damage by 15% per level.
-  itemBaseCost: 4096
+  itemBaseCost: 40960
   itemCostMultiplier: 1.9
   upgradeIndex: 10
   purchaseText: Upgrade

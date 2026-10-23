@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
-  knockbackRecovery: 25
+  knockbackRecovery: 12
 --- !u!114 &3810900194020735609
 MonoBehaviour:
   m_ObjectHideFlags: 0
