@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Impulse Driver
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: High-output impulse circuitry transfers more force on impact, increasing projectile knockback by 25% per level.
-  itemBaseCost: 1536
+  itemBaseCost: 15360
   itemCostMultiplier: 1.7
   upgradeIndex: 7
   purchaseText: Upgrade

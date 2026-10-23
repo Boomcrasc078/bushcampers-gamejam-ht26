@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CPU Clock Generator
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Overclocked processing cycles execute firing instructions 10% faster per level, with each overclock compounding.
-  itemBaseCost: 4096
+  itemBaseCost: 40960
   itemCostMultiplier: 1.95
   upgradeIndex: 2
   purchaseText: Install

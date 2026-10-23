@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Instruction Pipeline
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Optimized instruction pipelines allow projectile routines to execute through 1 additional enemy per level before terminating.
-  itemBaseCost: 8192
+  itemBaseCost: 81920
   itemCostMultiplier: 2.35
   upgradeIndex: 6
   purchaseText: Upgrade

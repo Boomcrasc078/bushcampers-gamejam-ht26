@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wireless Receiver Array
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: More sensitive receiver antennas detect and attract nearby data and support pickups from 20% farther away per level.
-  itemBaseCost: 1024
+  itemBaseCost: 10240
   itemCostMultiplier: 1.6
   upgradeIndex: 8
   purchaseText: Upgrade

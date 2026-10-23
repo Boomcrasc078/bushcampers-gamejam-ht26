@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Servo Motor Drivers
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Upgraded motor controllers improve chassis response, increasing movement speed by 7% per level.
-  itemBaseCost: 2048
+  itemBaseCost: 20480
   itemCostMultiplier: 1.95
   upgradeIndex: 0
   purchaseText: Install

@@ -18,9 +18,9 @@ MonoBehaviour:
   moveSpeed: 2
   damage: 6
   attackRange: 2.5
-  attackWindup: 1
+  attackWindup: 0.6
   attackRecovery: 1.2
   attackCooldown: 0.6
   knockbackStrength: 9
-  trainingDataDropAmount: 512
+  trainingDataDropAmount: 5120
   spawnWeight: 2

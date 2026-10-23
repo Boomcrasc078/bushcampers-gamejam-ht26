@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RAM Allocation Module
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Larger memory blocks allow the simulation to allocate more space to individual rooms, increasing room size by 8% per level.
-  itemBaseCost: 2048
+  itemBaseCost: 20480
   itemCostMultiplier: 1.65
   upgradeIndex: 3
   purchaseText: Increase

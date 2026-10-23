@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Multi-Core Processor
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemDescription: Additional CPU cores execute attack routines in parallel, firing 1 extra projectile per shot per level. Wider spread reduces long-range accuracy.
-  itemBaseCost: 12288
+  itemBaseCost: 122880
   itemCostMultiplier: 2.5
   upgradeIndex: 11
   purchaseText: Install

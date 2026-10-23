@@ -23,6 +23,18 @@ public class RunManager : MonoBehaviour
     [SerializeField] private float difficultyIncreaseInterval = 30f;
     [SerializeField] private int extraEnemiesPerIncrease = 1;
 
+    [Header("Kill Combo")]
+    [SerializeField, Min(1f)] private float comboWindow = 6f;
+    [SerializeField, Min(0f)] private float comboBonusPerKill = 0.05f;
+    [SerializeField, Min(1f)] private float maxComboMultiplier = 1.5f;
+    [SerializeField] private int[] comboTierKillThresholds = { 2, 4, 6, 9, 12, 16, 20, 25, 30, 36 };
+
+    private int comboKills;
+    private float lastKillTime = float.NegativeInfinity;
+
+    public int ComboKills => comboKills;
+    
+
     private EnemySpawner enemySpawner;
     private float elapsedTime;
     private float spawnTimer;
@@ -32,9 +44,70 @@ public class RunManager : MonoBehaviour
     public float ElapsedTime => elapsedTime;
     public int EnemiesKilled => enemiesKilled;
 
+    public float ComboDuration => comboWindow;
+
+    public float ComboTimeRemaining => comboKills > 0 ? Mathf.Max(0f, comboWindow - (Time.time - lastKillTime)) : 0f;
+
+    public float ComboMultiplier
+    {
+        get
+        {
+            int tier = 0;
+
+            foreach (int threshold in comboTierKillThresholds)
+            {
+                if (comboKills < threshold)
+                    break;
+
+                tier++;
+            }
+
+            return Mathf.Min(maxComboMultiplier, 1f + tier * comboBonusPerKill);
+        }
+    }
+
+    public int ComboTier
+    {
+        get
+        {
+            int tier = 0;
+
+            foreach (int threshold in comboTierKillThresholds)
+            {
+                if (comboKills < threshold)
+                    break;
+
+                tier++;
+            }
+
+            return tier;
+        }
+    }
+
+    public int KillsToNextComboTier
+    {
+        get
+        {
+            foreach (int threshold in comboTierKillThresholds)
+            {
+                if (comboKills < threshold)
+                    return threshold - comboKills;
+            }
+
+            return 0;
+        }
+    }
+
+
     public void RegisterEnemyKill()
     {
         enemiesKilled++;
+
+        if (Time.time - lastKillTime > comboWindow)
+            comboKills = 0;
+
+        comboKills++;
+        lastKillTime = Time.time;
     }
 
 
@@ -45,12 +118,17 @@ public class RunManager : MonoBehaviour
         elapsedTime = 0f;
         spawnTimer = 0f;
         enemiesKilled = 0;
+        comboKills = 0;
+        lastKillTime = float.NegativeInfinity;
 
         SpawnEnemies();
     }
 
     private void Update()
     {
+        if (comboKills > 0 && Time.time - lastKillTime >= comboWindow)
+            comboKills = 0;
+
         if (enemySpawner == null)
             return;
 
