@@ -11,6 +11,8 @@ public class EnemyMeleeAttack : MonoBehaviour
 
     [Header("Collision")]
     [SerializeField] private LayerMask wallLayer;
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
 
     private Transform target;
     private Health targetHealth;
@@ -118,6 +120,8 @@ public class EnemyMeleeAttack : MonoBehaviour
 
         isAttacking = false;
         nextAttackTime = Time.time + attackCooldown;
+
+        animator.SetTrigger("Attack");
     }
 
     private void PlayAttackParticles()
